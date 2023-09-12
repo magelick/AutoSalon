@@ -1,0 +1,19 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Поиск автомобиля{% endblock %}
+
+{% block content %}
+    <h1>Поиск авто</h1>
+    <h2>С помощью поисковика вы сможете найти автомобиль своей мечты в нашем Автосалоне!</h2>
+    <h2>Поиск авто:</h2>
+    <form method="get">
+        <h3>Бренд:</h3>{{ form.brand }}<br>
+        <h3>Модель:</h3>{{ form.model }}<br>
+        <button type="submit">Найти</button>
+    </form>
+    <h2>Найдено:</h2>
+<!--    {% for car in search_car %}-->
+<!--        {{ car.brand }}-->
+<!--        {{ car.model }}-->
+<!--    {% endfor%}-->
+{% endblock %}
