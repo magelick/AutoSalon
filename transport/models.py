@@ -16,7 +16,30 @@ class BrandCar(models.Model):
 class ModelCar(models.Model):
     model = models.CharField(verbose_name='Модель', max_length=50)
     slug = models.SlugField(max_length=200, blank=False, null=False)
+    brand = models.ForeignKey(to='BrandCar', on_delete=models.DO_NOTHING, db_index=True)
+
+    def __str__(self):
+        return self.model
+
+    class Meta:
+        verbose_name = 'модель'
+        verbose_name_plural = 'модели'
+
+
+class BodyCar(models.Model):
     body = models.CharField(verbose_name='Кузов', max_length=50)
+    slug = models.SlugField(max_length=200, blank=False, null=False)
+    model = models.ForeignKey(to='ModelCar', on_delete=models.DO_NOTHING, db_index=True)
+
+    def __str__(self):
+        return self.body
+
+    class Meta:
+        verbose_name = 'кузов'
+        verbose_name_plural = 'кузова'
+
+
+class Description(models.Model):
     price = models.PositiveIntegerField(verbose_name='Цена')
     year_of_issue = models.PositiveIntegerField(verbose_name='Год выпуска')
     mileage = models.PositiveIntegerField(verbose_name='Пробег')
@@ -28,11 +51,11 @@ class ModelCar(models.Model):
     color = models.CharField(verbose_name='Цвет', max_length=50)
     description = models.CharField(verbose_name='Описание', max_length=150)
     equipment = models.TextField(verbose_name='Комплектация')
-    brand = models.ForeignKey(to='BrandCar', on_delete=models.DO_NOTHING, db_index=True)
+    body = models.ForeignKey(to='BodyCar', on_delete=models.DO_NOTHING, db_index=True)
 
     def __str__(self):
-        return self.model
+        return self.price
 
     class Meta:
-        verbose_name = 'модель'
-        verbose_name_plural = 'модели'
+        verbose_name = 'характеристика'
+        verbose_name_plural = 'характеристики'
