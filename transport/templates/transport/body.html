@@ -1,0 +1,13 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    {% for car in body_car %}
+      {{ car.body }}
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    {% for car in body_car %}
+        <a href="{% url 'descr_car' slug=car.slug %}"><h2>{{ car }}</h2></a>
+    {% endfor %}
+{% endblock %}

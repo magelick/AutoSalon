@@ -37,5 +37,5 @@ class BodyAdmin(admin.ModelAdmin):
 @admin.register(Description)
 class DescriptionAdmin(admin.ModelAdmin):
     search_fields = ('price',)
-    list_display = ('price', 'year_of_issue', 'mileage')
+    list_display = ('body', 'price', 'year_of_issue', 'mileage')
     ordering = ('year_of_issue', )

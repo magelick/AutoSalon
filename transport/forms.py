@@ -8,3 +8,6 @@ class SearchCarsForm(forms.Form):
     model = forms.CharField(
         required=False
     )
+    body = forms.CharField(
+        required=False
+    )

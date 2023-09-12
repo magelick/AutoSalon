@@ -9,6 +9,6 @@
 {% block content %}
     {% for item in models %}
         <h1>Модели {{ item.brand }}</h1>
-        <a href="{% url 'one_car' slug=item.slug %}"><h2>{{ item.model }} {{ item.body }}</h2></a>
+        <a href="{% url 'body_car' slug=item.slug %}"><h2>{{ item.model }}</h2></a>
     {% endfor %}
 {% endblock %}

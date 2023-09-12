@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views.generic import ListView, TemplateView
-from .models import BrandCar, ModelCar
-from django.http import HttpResponseNotFound
+from .models import BrandCar, ModelCar, BodyCar, Description
 from .forms import SearchCarsForm
 
 
@@ -24,28 +23,39 @@ class ModelsListView(ListView):
         return get_list_or_404(ModelCar, brand=brand)
 
 
-class OneCarListView(ListView):
-    model = ModelCar
-    template_name = 'transport/one_car.html'
-    context_object_name = 'one_car'
+class BodyListView(ListView):
+    model = BodyCar
+    template_name = 'transport/body.html'
+    context_object_name = 'body_car'
 
     def get_queryset(self):
         model_slug = self.kwargs.get('slug')
         model = get_object_or_404(ModelCar, slug=model_slug)
-        return get_list_or_404(ModelCar, model=model)
+        return get_list_or_404(BodyCar, model=model)
+
+
+class DescriptionListView(ListView):
+    model = Description
+    template_name = 'transport/descr.html'
+    context_object_name = 'description_car'
+
+    def get_queryset(self):
+        body_slug = self.kwargs.get('slug')
+        body = get_object_or_404(BodyCar, slug=body_slug)
+        return get_list_or_404(Description, body=body)
 
 
 class CarSearchListView(ListView):
-    model = ModelCar
+    model = (BrandCar, ModelCar, BodyCar, Description)
     template_name = 'transport/search_form.html'
     context_object_name = 'search_car'
 
     def get_queryset(self):
         if 'brand' not in self.request.GET:
-            return self.model.objects.all()
+            return self.BrandCar.objects.all()
         elif 'model' not in self.request.GET:
-            return self.model.objects.filter(brand__slug=self.request.GET.get('brand'))
-        else:
+            return self.ModelCar.objects.filter(brand__slug=self.request.GET.get('brand'))
+        elif 'body' not in self.request.GET:
             return self.model.objects.filter(model__slug=self.request.GET.get('model'))
 
     def get_context_data(self, *, object_list=None, **kwargs):

@@ -1,14 +1,14 @@
 {% extends 'shop/base.html' %}
 
 {% block title %}
-    {% for car in one_car %}
-      {{ car.brand }} {{ car.model }} {{ car.body }}
+    {% for car in description_car %}
+      {{ car.body }}
     {% endfor %}
 {% endblock %}
 
 {% block content %}
-    {% for car in one_car %}
-        <h1>{{ car.brand }} {{ car.model }} {{ car.body }}</h1>
+    {% for car in description_car %}
+        <h1>{{ car.body }}</h1>
         <h2>Цена: {{ car.price }} $</h2>
         <h2>Год выпуска: {{ car.year_of_issue }} г.</h2>
         <h2>Пробег: {{ car.mileage }} км</h2>

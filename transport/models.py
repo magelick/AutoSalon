@@ -54,7 +54,7 @@ class Description(models.Model):
     body = models.ForeignKey(to='BodyCar', on_delete=models.DO_NOTHING, db_index=True)
 
     def __str__(self):
-        return self.price
+        return self.description
 
     class Meta:
         verbose_name = 'характеристика'
