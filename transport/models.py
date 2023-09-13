@@ -2,6 +2,7 @@ from django.db import models
 
 
 class BrandCar(models.Model):
+    # Бренд (марка): Volkswagen
     brand = models.CharField(verbose_name='Марка', max_length=50)
     slug = models.SlugField(max_length=200, blank=False, null=False)
 
@@ -14,6 +15,7 @@ class BrandCar(models.Model):
 
 
 class ModelCar(models.Model):
+    # Модель марки: Passat
     model = models.CharField(verbose_name='Модель', max_length=50)
     slug = models.SlugField(max_length=200, blank=False, null=False)
     brand = models.ForeignKey(to="BrandCar", on_delete=models.DO_NOTHING, db_index=True, related_name="models")
@@ -27,6 +29,7 @@ class ModelCar(models.Model):
 
 
 class BodyCar(models.Model):
+    # Кузов модели: B3 и B8
     body = models.CharField(verbose_name='Кузов', max_length=50)
     slug = models.SlugField(max_length=200, blank=False, null=False)
     model = models.ForeignKey(to='ModelCar', on_delete=models.DO_NOTHING, db_index=True, related_name='bodies')
@@ -40,15 +43,12 @@ class BodyCar(models.Model):
 
 
 class Description(models.Model):
+    # Описание: цена, год, пробег и т.д.
     price = models.PositiveIntegerField(verbose_name='Цена')
     year_of_issue = models.PositiveIntegerField(verbose_name='Год выпуска')
     mileage = models.PositiveIntegerField(verbose_name='Пробег')
     engine_volume = models.FloatField(verbose_name='Объём двигателя')
-    engine_type = models.CharField(verbose_name='Тип двигателя', max_length=20)
     engine_power = models.PositiveIntegerField(verbose_name='Мощность двигателя(л/с)')
-    transmission = models.CharField(verbose_name='Коробка передач', max_length=20)
-    drive_unit = models.CharField(verbose_name='Привод', max_length=20)
-    color = models.CharField(verbose_name='Цвет', max_length=50)
     description = models.CharField(verbose_name='Описание', max_length=150)
     equipment = models.TextField(verbose_name='Комплектация')
     body = models.ForeignKey(to="BodyCar", on_delete=models.DO_NOTHING, db_index=True, related_name="descriptions")
@@ -59,3 +59,63 @@ class Description(models.Model):
     class Meta:
         verbose_name = 'характеристика'
         verbose_name_plural = 'характеристики'
+
+
+class EngineType(models.Model):
+    # Тип двигателя: бензин, дизель, электро
+    engine_type = models.CharField(verbose_name='Тип двигателя', max_length=20)
+
+    def __str__(self):
+        return self.engine_type
+
+    class Meta:
+        verbose_name = 'тип двигателя'
+        verbose_name_plural = 'типы двигателей'
+
+
+class Transmission(models.Model):
+    # Коробка передач: автомат, механика
+    transmission = models.CharField(verbose_name='Коробка передач', max_length=20)
+
+    def __str__(self):
+        return self.transmission
+
+    class Meta:
+        verbose_name = 'коробка передач'
+        verbose_name_plural = 'коробки передач'
+
+
+class DriveUnit(models.Model):
+    # Тип привод: полный, передний, задний
+    drive_unit = models.CharField(verbose_name='Привод', max_length=20)
+
+    def __str__(self):
+        return self.drive_unit
+
+    class Meta:
+        verbose_name = 'тип привода'
+        verbose_name_plural = 'типы приводов'
+
+
+class BodyTypeCar(models.Model):
+    # Тип кузова: внедорожник, кабриолет, седан, купе и т.д.
+    type_body = models.CharField(verbose_name='Тип кузова', max_length=50)
+
+    def __str__(self):
+        return self.type_body
+
+    class Meta:
+        verbose_name = 'тип кузова'
+        verbose_name_plural = 'типы кузова'
+
+
+class ColorType(models.Model):
+    # Цвет кузова
+    color = models.CharField(verbose_name='Цвет', max_length=50)
+
+    def __str__(self):
+        return self.color
+
+    class Meta:
+        verbose_name = 'цвет'
+        verbose_name_plural = 'цвета'
