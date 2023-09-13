@@ -53,9 +53,11 @@ class CarSearchListView(ListView):
         if 'brand' not in self.request.GET:
             return BrandCar.objects.all()
         elif 'model' not in self.request.GET:
-            return BrandCar.model.filter(brand__slug=self.request.GET.get('brand'))
+            return BrandCar.brand.models.filter(brand__slug=self.request.GET.get('brand'))
         elif 'body' not in self.request.GET:
-            return ModelCar.objects.filter(model__slug=self.request.GET.get('model'))
+            return ModelCar.model.bodies.filter(model__slug=self.request.GET.get('model'))
+        else:
+            return BodyCar.body.descriptions.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
