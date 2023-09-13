@@ -46,17 +46,16 @@ class DescriptionListView(ListView):
 
 
 class CarSearchListView(ListView):
-    model = (BrandCar, ModelCar, BodyCar, Description)
     template_name = 'transport/search_form.html'
     context_object_name = 'search_car'
 
     def get_queryset(self):
         if 'brand' not in self.request.GET:
-            return self.BrandCar.objects.all()
+            return BrandCar.objects.all()
         elif 'model' not in self.request.GET:
-            return self.ModelCar.objects.filter(brand__slug=self.request.GET.get('brand'))
+            return BrandCar.model.filter(brand__slug=self.request.GET.get('brand'))
         elif 'body' not in self.request.GET:
-            return self.model.objects.filter(model__slug=self.request.GET.get('model'))
+            return ModelCar.objects.filter(model__slug=self.request.GET.get('model'))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

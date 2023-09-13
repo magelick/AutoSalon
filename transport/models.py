@@ -4,6 +4,7 @@ from django.db import models
 class BrandCar(models.Model):
     brand = models.CharField(verbose_name='Марка', max_length=50)
     slug = models.SlugField(max_length=200, blank=False, null=False)
+    model = models.ForeignKey(to='ModelCar', on_delete=models.DO_NOTHING, db_index=True, related_name='models')
 
     def __str__(self):
         return self.brand
@@ -16,7 +17,7 @@ class BrandCar(models.Model):
 class ModelCar(models.Model):
     model = models.CharField(verbose_name='Модель', max_length=50)
     slug = models.SlugField(max_length=200, blank=False, null=False)
-    brand = models.ForeignKey(to='BrandCar', on_delete=models.DO_NOTHING, db_index=True)
+    body = models.ForeignKey(to='BodyCar', on_delete=models.DO_NOTHING, db_index=True, related_name='bodies')
 
     def __str__(self):
         return self.model
@@ -29,7 +30,7 @@ class ModelCar(models.Model):
 class BodyCar(models.Model):
     body = models.CharField(verbose_name='Кузов', max_length=50)
     slug = models.SlugField(max_length=200, blank=False, null=False)
-    model = models.ForeignKey(to='ModelCar', on_delete=models.DO_NOTHING, db_index=True)
+    descr = models.ForeignKey(to='ModelCar', on_delete=models.DO_NOTHING, db_index=True, related_name='descr')
 
     def __str__(self):
         return self.body
@@ -51,7 +52,6 @@ class Description(models.Model):
     color = models.CharField(verbose_name='Цвет', max_length=50)
     description = models.CharField(verbose_name='Описание', max_length=150)
     equipment = models.TextField(verbose_name='Комплектация')
-    body = models.ForeignKey(to='BodyCar', on_delete=models.DO_NOTHING, db_index=True)
 
     def __str__(self):
         return self.description

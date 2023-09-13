@@ -9,12 +9,11 @@
     <form method="get">
         <h3>Бренд:</h3>{{ form.brand }}<br>
         <h3>Модель:</h3>{{ form.model }}<br>
-        <h3>Кузов: {{ form.body }}</h3><br>
+        <h3>Кузов:</h3>{{ form.body }}<br>
         <button type="submit">Найти</button>
     </form>
     <h2>Найдено:</h2>
-<!--    {% for car in search_car %}-->
-<!--        {{ car.brand }}-->
-<!--        {{ car.model }}-->
-<!--    {% endfor%}-->
+    {% for car in search_car %}
+        {{ car }}
+    {% endfor%}
 {% endblock %}
