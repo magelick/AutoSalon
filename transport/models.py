@@ -73,7 +73,7 @@ class EngineType(models.Model):
         verbose_name_plural = 'типы двигателей'
 
 
-class Transmission(models.Model):
+class TransmissionType(models.Model):
     # Коробка передач: автомат, механика
     transmission = models.CharField(verbose_name='Коробка передач', max_length=20)
 
@@ -85,7 +85,7 @@ class Transmission(models.Model):
         verbose_name_plural = 'коробки передач'
 
 
-class DriveUnit(models.Model):
+class DriveUnitType(models.Model):
     # Тип привод: полный, передний, задний
     drive_unit = models.CharField(verbose_name='Привод', max_length=20)
 
@@ -119,3 +119,8 @@ class ColorType(models.Model):
     class Meta:
         verbose_name = 'цвет'
         verbose_name_plural = 'цвета'
+
+
+class AnnouncementCar(models.Model):
+    # Конкретное объявление
+    pass
