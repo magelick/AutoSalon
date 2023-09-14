@@ -193,3 +193,10 @@ class AnnouncementCar(models.Model):
         on_delete=models.DO_NOTHING,
         db_index=True
     )
+
+    def __str__(self):
+        return self.car_brand
+
+    class Meta:
+        verbose_name = 'объявление'
+        verbose_name_plural = 'объявления'
