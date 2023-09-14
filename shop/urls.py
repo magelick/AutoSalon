@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import ShopListView, AboutUsTemplateView
+from .views import ShopListView, AboutUsTemplateView, NotFoundTemplateView
 
-# handler404 = NotFoundTemplateView.as_view()
+handler404 = NotFoundTemplateView.as_view()
 
 urlpatterns = [
     path('', ShopListView.as_view(), name='homepage'),

@@ -148,37 +148,48 @@ class ColorType(models.Model):
 
 class AnnouncementCar(models.Model):
     # Конкретное объявление
-    body = models.ForeignKey(
+    car_brand = models.ForeignKey(
+        to="BrandCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True
+    )
+    car_model = models.ForeignKey(
+        to="ModelCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True
+    )
+    car_body = models.ForeignKey(
         to="BodyCar",
         on_delete=models.DO_NOTHING,
-        db_index=True,
-        related_name="body_car"
+        db_index=True
     )
-    engine_type = models.ForeignKey(
-        to="EngineType", on_delete=models.DO_NOTHING,
-        db_index=True,
-        related_name="engine_type"
+    car_descr = models.ForeignKey(
+        to="Description",
+        on_delete=models.DO_NOTHING,
+        db_index=True
     )
-    transmission_type = models.ForeignKey(
+    car_engine_type = models.ForeignKey(
+        to="EngineType",
+        on_delete=models.DO_NOTHING,
+        db_index=True
+    )
+    car_transmission_type = models.ForeignKey(
         to="TransmissionType",
         on_delete=models.DO_NOTHING,
-        db_index=True,
-        related_name="transmission_type"
+        db_index=True
     )
-    drive_unit_type = models.ForeignKey(
+    car_drive_unit_type = models.ForeignKey(
         to="DriveUnitType",
         on_delete=models.DO_NOTHING,
-        db_index=True,
-        related_name="drive_unit"
+        db_index=True
     )
-    body_type_car = models.ForeignKey(
+    car_body_type = models.ForeignKey(
         to="BodyTypeCar",
         on_delete=models.DO_NOTHING,
-        related_name="descriptions"
+        db_index=True
     )
-    color_type = models.ForeignKey(
+    car_color_type = models.ForeignKey(
         to="ColorType",
         on_delete=models.DO_NOTHING,
-        db_index=True,
-        related_name="descriptions"
+        db_index=True
     )
