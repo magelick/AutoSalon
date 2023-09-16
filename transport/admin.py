@@ -4,7 +4,6 @@ from .models import (
     BrandCar,
     ModelCar,
     BodyCar,
-    Description,
     EngineType,
     BodyTypeCar,
     ColorType,
@@ -41,14 +40,6 @@ class BodyAdmin(admin.ModelAdmin):
         'slug': ('body',)
     }
     ordering = ('model',)
-
-
-@admin.register(Description)
-class DescriptionAdmin(admin.ModelAdmin):
-    search_fields = ('price', 'year_of_issue', 'mileage')
-    list_display = ('body', 'year_of_issue', 'price', 'mileage')
-    list_filter = ('body', 'year_of_issue', 'price', 'mileage')
-    ordering = ('body',)
 
 
 @admin.register(EngineType)

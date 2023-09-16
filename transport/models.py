@@ -52,27 +52,6 @@ class BodyCar(models.Model):
         verbose_name_plural = 'кузова'
 
 
-class Description(models.Model):
-    # Описание: цена, год, пробег и т.д.
-    price = models.PositiveIntegerField(verbose_name='Цена')
-    year_of_issue = models.PositiveIntegerField(verbose_name='Год выпуска')
-    mileage = models.PositiveIntegerField(verbose_name='Пробег')
-    engine_volume = models.FloatField(verbose_name='Объём двигателя')
-    engine_power = models.PositiveIntegerField(verbose_name='Мощность двигателя(л/с)')
-    description = models.CharField(verbose_name='Описание', max_length=150)
-    equipment = models.TextField(verbose_name='Комплектация')
-    body = models.ForeignKey(
-        to="BodyCar", on_delete=models.DO_NOTHING,
-        db_index=True,
-        related_name="descriptions"
-    )
-
-    def __str__(self):
-        return self.description
-
-    class Meta:
-        verbose_name = 'характеристика'
-        verbose_name_plural = 'характеристики'
 
 
 class EngineType(models.Model):
@@ -151,51 +130,58 @@ class AnnouncementCar(models.Model):
     car_brand = models.ForeignKey(
         to="BrandCar",
         on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='марка'
     )
     car_model = models.ForeignKey(
         to="ModelCar",
         on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='модель'
     )
     car_body = models.ForeignKey(
         to="BodyCar",
         on_delete=models.DO_NOTHING,
-        db_index=True
-    )
-    car_descr = models.ForeignKey(
-        to="Description",
-        on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='кузов'
     )
     car_engine_type = models.ForeignKey(
         to="EngineType",
         on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='тип двигателя'
     )
     car_transmission_type = models.ForeignKey(
         to="TransmissionType",
         on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='тип коробки передач'
     )
     car_drive_unit_type = models.ForeignKey(
         to="DriveUnitType",
         on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='тип привода'
     )
     car_body_type = models.ForeignKey(
         to="BodyTypeCar",
         on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='тип кузова'
     )
     car_color_type = models.ForeignKey(
         to="ColorType",
         on_delete=models.DO_NOTHING,
-        db_index=True
+        db_index=True,
+        verbose_name='цвет'
     )
-
-    def __str__(self):
-        return self.car_brand
+    price = models.PositiveIntegerField(verbose_name='Цена')
+    year_of_issue = models.PositiveIntegerField(verbose_name='Год выпуска')
+    mileage = models.PositiveIntegerField(verbose_name='Пробег')
+    engine_volume = models.FloatField(verbose_name='Объём двигателя')
+    engine_power = models.PositiveIntegerField(verbose_name='Мощность двигателя(л/с)')
+    description = models.TextField(verbose_name='Описание')
+    equipment = models.TextField(verbose_name='Комплектация')
 
     class Meta:
         verbose_name = 'объявление'
