@@ -3,9 +3,6 @@ from .models import AnnouncementCar
 from .forms import SearchCarsForm
 
 
-# from .forms import SearchCarsForm
-
-
 class CarSearchListView(ListView):
     model = AnnouncementCar
     template_name = 'transport/search_form.html'
@@ -19,18 +16,17 @@ class CarSearchListView(ListView):
         car_body = self.request.GET.get('body')
 
         if car_brand:
-            queryset = queryset.filter(car_brand__slug=car_brand)
+            queryset = queryset.filter(car_brand__slug__contains=car_brand)
         if car_model:
             queryset = queryset.filter(car_model__slug=car_model)
         if car_body:
-            queryset = queryset.filter(car_body__slug=car_body)
+            queryset = queryset.filter(car_body__slug__contains=car_body)
 
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        form = SearchCarsForm(self.request.GET)
-        context['form'] = form
+        context['form'] = SearchCarsForm(self.request.GET)
         return context
 
 

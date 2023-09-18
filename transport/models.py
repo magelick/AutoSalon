@@ -52,8 +52,6 @@ class BodyCar(models.Model):
         verbose_name_plural = 'кузова'
 
 
-
-
 class EngineType(models.Model):
     # Тип двигателя: бензин, дизель, электро
     engine_type = models.CharField(
