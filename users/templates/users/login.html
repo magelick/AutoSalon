@@ -1,0 +1,13 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+    <h1>Авторизация пользователя</h1>
+    <form method="get">
+        <h2>Имя пользователя: {{ form.username }}</h2>
+        <h2>Электронная почта: {{ form.email }}</h2>
+        <h2>Пароль: {{ form.password }}</h2>
+        <button type="submit"><h2>Войти</h2></button>
+    </form>
+{% endblock %}

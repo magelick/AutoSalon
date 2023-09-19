@@ -1,0 +1,15 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Регистрация пользователя{% endblock %}
+
+{% block content %}
+    <h1>Регистрация</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+<!--        <h2>Имя пользователя: {{ form.username }}</h2>-->
+<!--        <h2>Электронная почта: {{ form.email }}</h2>-->
+<!--        <h2>Пароль: {{ form.password }}</h2>-->
+        <a href="{% url 'login' %}"><button type="submit"><h2>Зарегистрироваться</h2></button></a>
+    </form>
+{% endblock %}
