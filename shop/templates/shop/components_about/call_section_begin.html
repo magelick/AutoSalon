@@ -1,0 +1,44 @@
+{% load static %}
+ Call Section Begin
+<section class="call spad set-bg" data-setbg="{% static 'autosalon/img/about/call-bg.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6">
+                <div class="call__text">
+                    <div class="section-title">
+                        <h2>Обратная связь</h2>
+                        <p>Если у вас сформиловались какие-нибудь вопросы, то вы у вас есть такая возможность.
+                        Оставьте свое имя, электронную почту и контактный телефон. В ближайшее время наши менеджеры
+                        свяжуться с вами!</p>
+                    </div>
+                    <a href="#">Контакты</a>
+                </div>
+            </div>
+            <div class="col-lg-6 offset-lg-1 col-md-6">
+                <form action="#" class="call__form">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="text" placeholder="Имя">
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" placeholder="Электронная почта">
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" placeholder="Контактный телефон">
+                        </div>
+                        <div class="col-lg-6">
+                            <select>
+                                <option value="">Выберите услугу</option>
+                                <option value="">Покупка автомобиля</option>
+                                <option value="">Продажа автомобиля</option>
+                                <option value="">Сервисные работы</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="site-btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Call Section End -->

@@ -1,28 +1,55 @@
-from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib import messages
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from .forms import RegisterUsersForm, AuthenticationUsersForm
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 
 
 # Представление для регистрации новых пользователей
 class SignUpView(CreateView):
     form_class = RegisterUsersForm
     template_name = 'users/sign_up.html'
-    success_url = reverse_lazy('login')
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+    def post(self, request):
+        form = RegisterUsersForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('login')
+        messages.error(request=request, message="Что-то не верно введено")
+        return render(
+            request=request,
+            template_name=self.template_name,
+            context={'form': form}
+        )
 
 
 # Представление для входа пользователя
 class CustomLoginView(LoginView):
     form_class = AuthenticationUsersForm
     template_name = 'users/login.html'
-    success_url = reverse_lazy('homepage')
 
+    def get(self, request):
+        form = AuthenticationUsersForm(request.GET)
 
-# Представление для выхода пользователя
-class CustomLogoutView(LogoutView):
-    next_page = reverse_lazy('login')
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
+            user = authenticate(
+                username=username,
+                email=email,
+                password1=password1,
+                password2=password2
+            )
+            if user:
+                login(request, user)
+                return redirect('homepage')
+        return render(
+            request=request,
+            template_name=self.template_name,
+            context={'form': form}
+        )

@@ -1,0 +1,51 @@
+{% load static %}
+<!-- Services Section Begin -->
+<section class="services spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span>Наши услуги</span>
+                    <h2>Вот что мы предлагаем:</h2>
+<!--                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="services__item">
+                    <img src="{% static 'autosalon/img/services/services-1.png' %}" alt="">
+                    <h5>Аренда автомобиля</h5>
+                    <p>В нашем автосалоне можно арендовать любой достпуный понравившейся автомобиль</p>
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="services__item">
+                    <img src="{% static 'autosalon/img/services/services-2.png' %}" alt="">
+                    <h5>Покупка автомобиля</h5>
+                    <p>В нашем автосалоне вы всегда можете приобрести любой понравившейся вм автомобиль</p>
+                    <a href="{% url 'search' %}"><i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="services__item">
+                    <img src="{% static 'autosalon/img/services/services-3.png' %}" alt="">
+                    <h5>Сервис</h5>
+                    <p>В нашем автосалоне есть также возможность воспользоваться услугами сервиса</p>
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="services__item">
+                    <img src="{% static 'autosalon/img/services/services-4.png' %}" alt="">
+                    <h5>Поддержка 24/7</h5>
+                    <p>В нашем автосалоне вы всегда найдёте ответы на любые интересующие
+                        вас вопросы а также поддержу наших менеджеров</p>
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->

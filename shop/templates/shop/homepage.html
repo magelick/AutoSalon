@@ -1,10 +1,29 @@
 {% extends 'shop/base.html' %}
+
+
 {% block title %}Автосалон №1{% endblock %}
+
+
 {% block content %}
-    <h1>Приветсвуем вас в нашем Автосалоне №1</h1>
-    <h2>Здесь вы найдёте обширный выбор атвомобилей на любой вкус: от кабриолетов до внедорожников и спорткаров!</h2>
-    <a href="{% url 'search' %}"><button><h2>Поиск авто</h2></button></a><br>
-    <a href="{% url 'about' %}"><button><h2>О нас</h2></button></a><br>
-    <a href="{% url 'signup' %}"><button><h2>Регистарция</h2></button></a><br>
-    <a href="{% url 'login' %}"><button><h2>Войти</h2></button></a>
+
+    {% include 'shop/components_homepage/page_preloder.html' %}
+
+    {% include 'shop/components_homepage/offcanvas_menu_begin.html' %}
+
+    {% include 'shop/components_homepage/header_section_begin.html' %}
+
+    {% include 'shop/components_homepage/hero_section_begin.html' %}
+
+    {% include 'shop/components_homepage/services_section_begin.html' %}
+
+    {% include 'shop/components_homepage/feature_section_begin.html' %}
+
+    {% include 'shop/components_homepage/chooseus_section_begin.html' %}
+
+    {% include 'shop/components_homepage/cta_begin.html' %}
+
+    {% include 'shop/components_homepage/footer_section_begin.html' %}
+
+    {% include 'shop/components_homepage/search_begin.html' %}
+
 {% endblock %}
