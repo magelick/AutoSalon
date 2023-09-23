@@ -1,5 +1,3 @@
-from django.http import HttpResponseNotFound
-
 from django.views.generic import TemplateView
 
 
@@ -10,6 +8,10 @@ class ShopListView(TemplateView):
 
 class AboutUsTemplateView(TemplateView):
     template_name = 'shop/about.html'
+
+
+class ContactTemplateView(TemplateView):
+    template_name = 'shop/contact.html'
 
 
 class NotFoundTemplateView(TemplateView):
