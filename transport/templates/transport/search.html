@@ -1,0 +1,21 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Каталог автомобилей{% endblock %}
+
+{% block content %}
+
+    {% include 'transport/components_search/page_preloder.html' %}
+
+    {% include 'transport/components_search/offcanvas_menu.html' %}
+
+    {% include 'transport/components_search/header_section.html' %}
+
+    {% include 'transport/components_search/breadcrumb.html' %}
+
+    {% include 'transport/components_search/car_section.html' %}
+
+    {% include 'transport/components_search/footer_section.html' %}
+
+    {% include 'transport/components_search/search.html' %}
+
+{% endblock %}

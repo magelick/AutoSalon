@@ -3,18 +3,10 @@
 {% block title %}Регистрация пользователя{% endblock %}
 
 {% block content %}
-    <h1>Регистрация</h1><br>
-    <form method="post">
-        {% csrf_token %}
-<!--        {{ form }}-->
-        <h2>Имя пользователя:</h2>
-        {{ form.username }}<br>
-        <h2>Электронная почта:</h2>
-        {{ form.email }}<br>
-        <h2>Пароль:</h2>
-        {{ form.password1 }}<br>
-        <h2>Потверждение пароля:</h2>
-        {{ form.password2 }}<br><br>
-        <a href="{% url 'login' %}"><button type="submit"><h2>Зарегистрироваться</h2></button></a>
-    </form>
+    {% include 'users/components_sign_up/page_preloder.html' %}
+    {% include 'users/components_sign_up/offcanvas_menu.html' %}
+    {% include 'users/components_sign_up/header_section.html' %}
+    {% include 'users/components_sign_up/sign_up.html' %}
+    {% include 'users/components_sign_up/footer_section.html' %}
+    {% include 'users/components_sign_up/search.html' %}
 {% endblock %}

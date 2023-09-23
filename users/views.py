@@ -1,7 +1,6 @@
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
 from .forms import RegisterUsersForm, AuthenticationUsersForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
@@ -36,14 +35,11 @@ class CustomLoginView(LoginView):
 
         if form.is_valid():
             username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password1 = form.cleaned_data['password1']
-            password2 = form.cleaned_data['password2']
+            password = form.cleaned_data['password']
             user = authenticate(
+                request=request,
                 username=username,
-                email=email,
-                password1=password1,
-                password2=password2
+                password=password
             )
             if user:
                 login(request, user)

@@ -5,7 +5,7 @@ from .forms import SearchCarsForm
 
 class CarSearchListView(ListView):
     model = AnnouncementCar
-    template_name = 'transport/search_form.html'
+    template_name = 'transport/search.html'
     context_object_name = 'search_car'
 
     def get_queryset(self):

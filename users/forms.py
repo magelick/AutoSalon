@@ -18,15 +18,7 @@ class AuthenticationUsersForm(AuthenticationForm):
     username = forms.CharField(
         max_length=100,
     )
-    email = forms.CharField(
-        max_length=100,
-        widget=forms.EmailInput
-    )
-    password1 = forms.CharField(
-        max_length=100,
-        widget=forms.PasswordInput
-    )
-    password2 = forms.CharField(
+    password = forms.CharField(
         max_length=100,
         widget=forms.PasswordInput
     )

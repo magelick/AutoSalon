@@ -3,29 +3,30 @@
 {% block title %}Поиск автомобиля{% endblock %}
 
 {% block content %}
-    <h1>Поиск авто</h1>
-    <h1>С помощью поисковика вы сможете найти автомобиль своей мечты в нашем Автосалоне!</h1>
-    <form method="GET">
-        <h2>Марка: {{ form.brand }}</h2>
-        <h2>Модель: {{ form.model }}</h2>
-        <h2>Кузов: {{ form.body }}</h2>
-        <button type="submit"><h2>Найти авто</h2></button>
-    </form><br>
-    {% for item in search_car %}
-        <h2>Модель: {{ item.car_brand }} {{ item.car_model }} {{ item.car_body }}</h2>
-        <h2>Год выпуска: {{ item.year_of_issue }} г.</h2>
-        <h2>Пробег: {{ item.mileage }} км</h2>
-        <h2>Цена: {{ item.price }} $</h2>
-        <h2>Объём двигателя: {{ item.engine_volume }} л.</h2>
-        <h2>Тип двигателя: {{ item.car_engine_type }}</h2>
-        <h2>Мощность двигателя (л/с): {{ item.engine_power }} л/с</h2>
-        <h2>Коробка передач: {{ item.car_transmission_type }}</h2>
-        <h2>Привод: {{ item.car_drive_unit_type }}</h2>
-        <h2>Тип кузова: {{ item.car_body_type }}</h2>
-        <h2>Цвет: {{ item.car_color_type }}</h2>
-        <h2>Описание: {{ item.description }}</h2>
-        <h2>Комплектация: {{ item.equipment }}</h2><br><br>
-    {% empty %}
-        <h2>Объявления не найдены!</h2>
+<!--    <h1>Поиск авто</h1>-->
+<!--    <h1>С помощью поисковика вы сможете найти автомобиль своей мечты в нашем Автосалоне!</h1>-->
+<!--    <form method="GET">-->
+<!--        <h2>Марка: {{ form.brand }}</h2>-->
+<!--        <h2>Модель: {{ form.model }}</h2>-->
+<!--        <h2>Кузов: {{ form.body }}</h2>-->
+<!--        <button type="submit"><h2>Найти авто</h2></button>-->
+<!--    </form><br>-->
+<!--    {% for item in search_car %}-->
+<!--        <h2>Модель: {{ item.car_brand }} {{ item.car_model }} {{ item.car_body }}</h2>-->
+<!--        <h2>Год выпуска: {{ item.year_of_issue }} г.</h2>-->
+<!--        <h2>Пробег: {{ item.mileage }} км</h2>-->
+<!--        <h2>Цена: {{ item.price }} $</h2>-->
+<!--        <h2>Объём двигателя: {{ item.engine_volume }} л.</h2>-->
+<!--        <h2>Тип двигателя: {{ item.car_engine_type }}</h2>-->
+<!--        <h2>Мощность двигателя (л/с): {{ item.engine_power }} л/с</h2>-->
+<!--        <h2>Коробка передач: {{ item.car_transmission_type }}</h2>-->
+<!--        <h2>Привод: {{ item.car_drive_unit_type }}</h2>-->
+<!--        <h2>Тип кузова: {{ item.car_body_type }}</h2>-->
+<!--        <h2>Цвет: {{ item.car_color_type }}</h2>-->
+<!--        <h2>Описание: {{ item.description }}</h2>-->
+<!--        <h2>Комплектация: {{ item.equipment }}</h2><br><br>-->
+<!--    {% empty %}-->
+<!--        <h2>Объявления не найдены!</h2>-->
+
     {% endfor %}
 {% endblock %}

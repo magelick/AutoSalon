@@ -3,17 +3,10 @@
 {% block title %}Вход{% endblock %}
 
 {% block content %}
-    <h1>Авторизация пользователя</h1><br>
-    <form method="post" >
-        {% csrf_token %}
-        <h2>Имя пользователя:</h2>
-        {{ form.username }}<br>
-        <h2>Электронная почта:</h2>
-        {{ form.email }}<br>
-        <h2>Пароль:</h2>
-        {{ form.password1 }}<br>
-        <h2>Потверждение пароля:</h2>
-        {{ form.password2 }}<br><br>
-        <a href="{% url 'homepage' %}"><button type="submit"><h2>Войти</h2></button></a>
-    </form>
+    {% include 'users/components_login/page_preloder.html' %}
+    {% include 'users/components_login/offcanvas_menu.html' %}
+    {% include 'users/components_login/header_section.html' %}
+    {% include 'users/components_login/login.html' %}
+    {% include 'users/components_login/footer_section.html' %}
+    {% include 'users/components_login/search.html' %}
 {% endblock %}
