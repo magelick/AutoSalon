@@ -43,7 +43,8 @@ class CustomLoginView(LoginView):
             )
             if user:
                 login(request, user)
-                return redirect('homepage')
+                return redirect('shop:homepage')
+
         return render(
             request=request,
             template_name=self.template_name,
