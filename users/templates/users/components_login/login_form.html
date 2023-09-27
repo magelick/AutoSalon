@@ -3,29 +3,29 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="register-form p-4 border rounded">
-                    <form action="#" method="post">
+                    <form action="" method="post">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
 <!--                                    <input type="username" class="form-control" name="username" placeholder="Имя пользователя" required>-->
-                                    {{ form.username }}
+                                    <h5>Имя пользователя: {{ form.username }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
 <!--                                    <input type="email" class="form-control" name="email" placeholder="Адрес электронной почты" required>-->
-                                    {{ form.password }}
+                                    <h5>Пароль: {{ form.password }}</h5>
                                 </div>
                             </div>
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                                <a href="{% url 'homepage' %}"><button type="submit" class="btn btn-primary btn-block">Войти</button></a>
                             </div>
                         </div>
                     </form>
                     <div class="text-center mt-3">
-                        <p>У вас нет аккаунта? <a href="{% url 'signup' %}">Регистрация</a></p>
+                        <p>У вас нет аккаунта?  <a href="{% url 'signup' %}">Регистрация</a></p>
                     </div>
                 </div>
             </div>

@@ -33,17 +33,17 @@ class CustomLoginView(LoginView):
     def post(self, request, *args, **kwargs):
         form = AuthenticationUsersForm(request.GET)
 
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(
-                request=request,
-                username=username,
-                password=password
-            )
-            if user:
-                login(request, user)
-                return redirect('homepage')
+        username = self.request.POST.get('username')
+        password = self.request.POST.get('password')
+
+        user = authenticate(
+            request=request,
+            username=username,
+            password=password
+        )
+        if user:
+            login(request, user)
+            return redirect('homepage')
         else:
             return render(
                 request=request,

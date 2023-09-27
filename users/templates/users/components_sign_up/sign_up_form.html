@@ -9,25 +9,25 @@
                             <div class="col-md-12">
                                 <div class="form-group">
 <!--                                    <input type="username" class="form-control" name="username" placeholder="Имя пользователя" required>-->
-                                    {{ form.username }}
+                                    <h5>Имя пользователя: {{ form.username }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
 <!--                                    <input type="email" class="form-control" name="email" placeholder="Адрес электронной почты" required>-->
-                                    {{ form.email }}
+                                    <h5>Адрес элетронной почты: {{ form.email }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
 <!--                                    <input type="password" class="form-control" name="password" placeholder="Пароль" required>-->
-                                    {{ form.password1 }}
+                                    <h5>Пароль: {{ form.password1 }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
 <!--                                    <input type="password" class="form-control" name="password2" placeholder="Потверждение пароля" required>-->
-                                    {{ form.password2 }}
+                                    <h5>Потверждение пароля: {{ form.password2 }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -36,7 +36,7 @@
                         </div>
                     </form>
                     <div class="text-center mt-3">
-                        <p>У вас уже есть аккааунт? <a href="{% url 'login' %}">Войти</a></p>
+                        <p>У вас уже есть аккааунт?  <a href="{% url 'login' %}">Войти</a></p>
                     </div>
                 </div>
             </div>
