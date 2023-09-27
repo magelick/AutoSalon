@@ -14,100 +14,46 @@
                     </div>
                     <div class="car__filter">
                         <h5>Фильтр</h5>
-                        <form action="{% url 'search' %}">
-                            <select>
-                                <option data-display="Марка">Выберите марку</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.car_brand }}</option>
-<!--                                <option value="">Acura</option>-->
-<!--                                <option value="">Audi</option>-->
-<!--                                <option value="">Bentley</option>-->
-<!--                                <option value="">BMW</option>-->
-<!--                                <option value="">Bugatti</option>-->
-                                {% endfor %}
-                            </select>
+                        <form action="" method="get">
+                                <select>-->
+                                    <option data-display="Марка">Выберите марку</option>
+                                    <option value="">{{ form.brand }}</option>
+                                </select>
                             <select>
                                 <option data-display="Модель">Выберите модель</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.car_model }}</option>
-<!--                                <option value="">Q3</option>-->
-<!--                                <option value="">A4 </option>-->
-<!--                                <option value="">AVENTADOR</option>-->
-                                {% endfor %}
+                                <option value="">{{ form.model }}</option>
                             </select>
                             <select>
                                 <option value="">Кузов</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.car_body }}</option>
-<!--                                <option value="">Option 1</option>-->
-<!--                                <option value="">Option 2</option>-->
-                                {% endfor %}
+                                    <option value="">{{ form.body }}</option>
                             </select>
                             <select>
                                 <option value="">Год выпуска</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.year_of_issue }}</option>
-<!--                                <option value="">Bluetooth</option>-->
-<!--                                <option value="">WiFi</option>-->
-                                {% endfor %}
+                                <option value="">{{ form.year_of_issue }}</option>
                             </select>
                             <select>
                                 <option value="">Пробег</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.mileage }} км</option>
-<!--                                <option value="">27</option>-->
-<!--                                <option value="">20</option>-->
-<!--                                <option value="">15</option>-->
-<!--                                <option value="">10</option>-->
-                                {% endfor %}
-                            </select>
-                            <select>
-                                <option value="">Двигатель</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.car_engine_type }}</option>
-<!--                                <option value="">BS3</option>-->
-<!--                                <option value="">BS4</option>-->
-<!--                                <option value="">BS5</option>-->
-<!--                                <option value="">BS6</option>-->
-                                {% endfor %}
+                                <option value="">{{ form.mileage }}</option>
                             </select>
                             <select>
                                 <option value="">Объём двигателя</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.engine_volume }} л.</option>
-<!--                                <option value="">BS3</option>-->
-<!--                                <option value="">BS4</option>-->
-<!--                                <option value="">BS5</option>-->
-<!--                                <option value="">BS6</option>-->
-                                {% endfor %}
+                                <option value=""><{{ form.engine_volume }}</option>
+                            </select>
+                            <select>
+                                <option value="">Двигатель</option>
+                                <option value="">{{ form.engine_type }}</option>
                             </select>
                             <select>
                                 <option value="">Коробка передач</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.car_transmission_type }}</option>
-<!--                                <option value="">Bluetooth</option>-->
-<!--                                <option value="">WiFi</option>-->
-                                {% endfor %}
+                                <option value="">{{ form.transmission_type }}</option>
                             </select>
                             <select>
                                 <option value="">Цвет</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.car_color_type }}</option>
-<!--                                <option value="">Red</option>-->
-<!--                                <option value="">Blue</option>-->
-<!--                                <option value="">Black</option>-->
-<!--                                <option value="">Yellow</option>-->
-                                {% endfor %}
+                                <option value="">{{ form.color }}</option>
                             </select>
                             <select>
                                 <option value="">Тип кузова</option>
-                                {% for car in search_car %}
-                                    <option value="">{{ car.car_body_type }}</option>
-<!--                                <option value="">Red</option>-->
-<!--                                <option value="">Blue</option>-->
-<!--                                <option value="">Black</option>-->
-<!--                                <option value="">Yellow</option>-->
-                                {% endfor %}
+                                <option value="">{{ form.body_type }}</option>
                             </select>
                             <div class="filter-price">
                                 <p>Цена:</p>
@@ -156,6 +102,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
+                        {% for car in search_car %}
                         <div class="car__item">
                             <div class="car__item__pic__slider owl-carousel">
                                 <img src="{% static 'autosalon/img/cars/car-1.jpg' %}" alt="">
@@ -165,220 +112,24 @@
                             </div>
                             <div class="car__item__text">
                                 <div class="car__item__text__inner">
-                                    <div class="label-date">2016</div>
-                                    <h5><a href="#">Porsche cayenne turbo s</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
+                                    <div class="label-date">{{ car.year_of_issue }} г.</div>
+                                    <h5><a href="#">{{ car.car_brand }} {{ car.car_model }} {{ car.car_body }}</a></h5>
+                                        <ul>Пробег: {{ car.mileage }} км</ul>
+                                        <ul>Коробка передач: {{ car.car_transmission_type }}</ul>
+                                        <ul>Привод: {{ car.car_drive_unit_type }}</ul>
+                                        <ul>Объём: {{ car.engine_volume }} л</ul>
+                                        <ul>Тип двигателя: {{ car.car_engine_type }}</ul>
+                                        <ul>Мощность: {{ car.engine_power }} л/с</ul>
+                                        <ul>Цвет: {{ car.car_color_type }}</ul>
+                                        <ul>Тип кузова: {{ car.car_body_type }}</ul>
                                 </div>
                                 <div class="car__item__price">
-                                    <span class="car-option">For Rent</span>
-                                    <h6>$218<span>/Month</span></h6>
+                                    <span class="car-option">Купить</span>
+                                    <h6>{{ car.price }} $</h6>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/img/cars/car-2.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-8.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-6.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-4.jpg' %}" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2020</div>
-                                    <h5><a href="#">Toyota camry asv50l-jeteku</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option sale">For Sale</span>
-                                    <h6>$73,900</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/img/cars/car-3.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-8.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-6.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-5.jpg' %}" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2017</div>
-                                    <h5><a href="#">Bmw s1000rr 2019 m</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option">For Rent</span>
-                                    <h6>$299<span>/Month</span></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/img/cars/car-5.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-8.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-7.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-2.jpg' %}" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2018</div>
-                                    <h5><a href="#">Audi q8 2020</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option">For Rent</span>
-                                    <h6>$319<span>/Month</span></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/img/cars/car-6.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-8.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-3.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-1.jpg' %}" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2016</div>
-                                    <h5><a href="#">Mustang shelby gt500</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option sale">For Sale</span>
-                                    <h6>$730,900</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/img/cars/car-4.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-8.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-2.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-1.jpg' %}" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2019</div>
-                                    <h5><a href="#">Lamborghini huracan evo</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option">For Rent</span>
-                                    <h6>$319<span>/Month</span></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/' %}img/cars/car-7.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-2.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-4.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-1.jpg" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2020</div>
-                                    <h5><a href="#">Lamborghini huracan evo</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option sale">For Sale</span>
-                                    <h6>$120,000</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/' %}img/cars/car-8.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-3.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-5.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-2.jpg" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2017</div>
-                                    <h5><a href="#">Porsche cayenne turbo s</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option">For Rent</span>
-                                    <h6>$319<span>/Month</span></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="car__item">
-                            <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/' %}img/cars/car-8.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-3.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-5.jpg" alt="">
-                                <img src="{% static 'autosalon/' %}img/cars/car-2.jpg" alt="">
-                            </div>
-                            <div class="car__item__text">
-                                <div class="car__item__text__inner">
-                                    <div class="label-date">2020</div>
-                                    <h5><a href="#">Toyota camry asv50l-jeteku</a></h5>
-                                    <ul>
-                                        <li><span>35,000</span> mi</li>
-                                        <li>Auto</li>
-                                        <li><span>700</span> hp</li>
-                                    </ul>
-                                </div>
-                                <div class="car__item__price">
-                                    <span class="car-option sale">For sale</span>
-                                    <h6>$73,900</h6>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="pagination__option">

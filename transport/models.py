@@ -129,7 +129,7 @@ class AnnouncementCar(models.Model):
         to="BrandCar",
         on_delete=models.DO_NOTHING,
         db_index=True,
-        verbose_name='марка'
+        verbose_name='бренд'
     )
     car_model = models.ForeignKey(
         to="ModelCar",
@@ -173,6 +173,11 @@ class AnnouncementCar(models.Model):
         db_index=True,
         verbose_name='цвет'
     )
+    # car_image = models.ImageField(
+    #     upload_to='',
+    #     db_index=True,
+    #     verbose_name='фотографии'
+    # )
     price = models.PositiveIntegerField(verbose_name='Цена')
     year_of_issue = models.PositiveIntegerField(verbose_name='Год выпуска')
     mileage = models.PositiveIntegerField(verbose_name='Пробег')

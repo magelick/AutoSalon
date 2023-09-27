@@ -1,0 +1,45 @@
+<section class="register-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="register-form p-4 border rounded">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+<!--                                    <input type="username" class="form-control" name="username" placeholder="Имя пользователя" required>-->
+                                    {{ form.username }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+<!--                                    <input type="email" class="form-control" name="email" placeholder="Адрес электронной почты" required>-->
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+<!--                                    <input type="password" class="form-control" name="password" placeholder="Пароль" required>-->
+                                    {{ form.password1 }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+<!--                                    <input type="password" class="form-control" name="password2" placeholder="Потверждение пароля" required>-->
+                                    {{ form.password2 }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>У вас уже есть аккааунт? <a href="{% url 'login' %}">Войти</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
