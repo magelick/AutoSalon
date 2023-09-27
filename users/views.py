@@ -14,8 +14,7 @@ class SignUpView(CreateView):
         form = RegisterUsersForm(request.POST)
 
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            form.save()
             return redirect('login')
         else:
             return render(
