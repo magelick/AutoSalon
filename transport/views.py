@@ -27,11 +27,6 @@ class CarSearchListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         form = SearchCarsForm(self.request.GET)
-        # brands = AnnouncementCar.objects.get('car_brand')
-        # form.fields['brand'].choices = [(brand.car_brand.slug, brand.car_brand) for brand in brands]
-        if self.request.GET.get('brand'):
-            models = AnnouncementCar.objects.filter(car_brand__slug=self.request.GET.get('brand'))
-            form.fields['model'].choices = [(model.slug, model.car_model) for model in models]
         context['form'] = form
         return context
 
