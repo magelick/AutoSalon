@@ -173,11 +173,6 @@ class AnnouncementCar(models.Model):
         db_index=True,
         verbose_name='цвет'
     )
-    # car_image = models.ImageField(
-    #     upload_to='',
-    #     db_index=True,
-    #     verbose_name='фотографии'
-    # )
     price = models.PositiveIntegerField(verbose_name='Цена')
     year_of_issue = models.PositiveIntegerField(verbose_name='Год выпуска')
     mileage = models.PositiveIntegerField(verbose_name='Пробег')
@@ -185,6 +180,11 @@ class AnnouncementCar(models.Model):
     engine_power = models.PositiveIntegerField(verbose_name='Мощность двигателя(л/с)')
     description = models.TextField(verbose_name='Описание')
     equipment = models.TextField(verbose_name='Комплектация')
+    announcement_car_slug = models.SlugField(
+        max_length=200,
+        blank=False,
+        null=False
+    )
 
     class Meta:
         verbose_name = 'объявление'

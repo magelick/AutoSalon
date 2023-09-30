@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+
+
+{% block title %}
+    {% for car in car_details %}
+        {{ car.car_brand }} {{ car.car_model }} {{ car.car_body }}
+    {% endfor %}
+{% endblock %}
+
+
+{% block content %}
+
+    {% include 'transport/components_car/page_preloder.html'%}
+
+    {% include 'transport/components_car/offcanvas_menu.html'%}
+
+    {% include 'transport/components_car/header_section.html'%}
+
+    {% include 'transport/components_car/breadcrumb.html'%}
+
+    {% include 'transport/components_car/car_details_section.html'%}
+
+    {% include 'transport/components_car/footer_section.html'%}
+
+    {% include 'transport/components_car/search.html'%}
+
+{% endblock %}

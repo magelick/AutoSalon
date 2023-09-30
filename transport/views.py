@@ -27,8 +27,27 @@ class CarSearchListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         form = SearchCarsForm(self.request.GET)
+        brands = AnnouncementCar.objects.all()
+        form.fields['brand'].choices = ((brand.car_brand.slug, brand.car_brand.brand) for brand in brands)
+        if self.request.GET.get('brand'):
+            models = AnnouncementCar.objects.filter(car_model__slug=self.request.GET.get('model'))
+            form.fields['model'].choices = ((model.slug, model.model) for model in models)
+        if self.request.GET.get('model'):
+            bodies = AnnouncementCar.objects.filter(car_body__slug=self.request.GET.get('body'))
+            form.fields['body'].choices = ((body.slug, body.body) for body in bodies)
         context['form'] = form
         return context
+
+
+class CarDetailListView(ListView):
+    model = AnnouncementCar
+    template_name = 'transport/car.html'
+    context_object_name = 'car_details'
+
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        queryset = AnnouncementCar.objects.filter(announcement_car_slug=slug)
+        return queryset
 
 
 class NotFoundTemplateView(TemplateView):

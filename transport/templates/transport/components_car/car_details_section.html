@@ -1,0 +1,119 @@
+{% load static %}
+<!-- Car Details Section Begin -->
+<section class="car-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="car__details__pic">
+                    <div class="car__details__pic__large">
+                        <img class="car-big-img" src="{% static 'autosalon/img/cars/details/cd-1.jpg' %}" alt="">
+                    </div>
+                    <div class="car-thumbs">
+                        <div class="car-thumbs-track car__thumb__slider owl-carousel">
+                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-2.jpg' %}"><img
+                                    src="{% static 'autosalon/img/cars/details/sm-1.jpg' %}" alt=""></div>
+                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-3.jpg' %}"><img
+                                    src="{% static 'autosalon/img/cars/details/sm-2.jpg' %}" alt=""></div>
+                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-4.jpg' %}"><img
+                                    src="{% static 'autosalon/img/cars/details/sm-3.jpg' %}" alt=""></div>
+                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-5.jpg' %}"><img
+                                    src="{% static 'autosalon/img/cars/details/sm-4.jpg' %}" alt=""></div>
+                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-6.jpg' %}"><img
+                                    src="{% static 'autosalon/img/cars/details/sm-5.jpg' %}" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Основные характеристики</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="car__details__sidebar__model">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="car__details__tab__info__item">
+                                            <ul>
+                                                {% for car in car_details %}
+                                                    <li><h5>Год выпуска: <span>{{ car.year_of_issue }} г.</span></h5></li>
+                                                    <li><h5>Пробег: <span>{{ car.mileage }} км.</span></h5></li>
+                                                    <li><h5>Коробка передач: <span>{{ car.car_transmission_type }}</span></h5></li>
+                                                    <li><h5>Привод: <span>{{ car.car_drive_unit_type }}</span></h5></li>
+                                                    <li><h5>Объём двигателя: <span>{{ car.engine_volume }} л.</span></h5></li>
+                                                    <li><h5>Тип топлива: <span>{{ car.car_engine_type }} </span></h5></li>
+                                                    <li><h5>Мощность двигателя: <span>{{ car.engine_power }} л/с</span></h5></li>
+                                                    <li><h5>Тип кузова: <span>{{ car.car_body_type }}</span></h5></li>
+                                                    <li><h5>Цвет: <span>{{ car.car_color_type }}</span></h5></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="car__details__sidebar__model">
+                                <div class="car__details__tab__feature">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                            <div class="car__details__tab__feature__item">
+                                                <h5>Комплектация</h5>
+                                                <ul>
+                                                    {% for car in car_details %}
+                                                        <li><h6>{{ car.equipment }}</h6></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="car__details__tab__info">
+                                <div class="car__details__tab__feature">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                            <div class="car__details__tab__feature__item">
+                                                <h5>Описание</h5>
+                                                {% for car in car_details %}
+                                                    <h6>{{ car.description }}</h6>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="car__details__sidebar">
+                    <div class="car__details__sidebar__model">
+                        <ul>
+                            {% for car in car_details %}
+                                <li>Марка: <span>{{ car.car_brand }}</span></li>
+                                <li>Модель: <span>{{ car.car_model }}</span></li>
+                                <li>Кузов: <span>{{ car.car_body }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="car__details__sidebar__payment">
+                        <ul>
+                            {% for car in car_details %}
+                                <li>Год выпуска: <span>{{ car.year_of_issue }} г.</span></li>
+                                <li>Пробег: <span>{{ car.mileage }} км.</span></li>
+                                <li>Коробка передач: <span>{{ car.car_transmission_type }}</span></li>
+                                <li>Привод: <span>{{ car.car_drive_unit_type }}</span></li>
+                                <li>Цена: <span>{{ car.price }} $</span></li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{% url 'contact' %}" class="primary-btn"><i class="fa fa-credit-card"></i> Купить</a>
+<!--                        <a href="#" class="primary-btn sidebar-btn"><i class="fa fa-sliders"></i> Build Payment</a>-->
+<!--                        <a href="#" class="primary-btn sidebar-btn"><i class="fa fa-money"></i> Value Trade</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Car Details Section End -->

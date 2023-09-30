@@ -9,7 +9,7 @@ from .models import (
     ColorType,
     TransmissionType,
     DriveUnitType,
-    AnnouncementCar
+    AnnouncementCar,
 )
 
 
@@ -66,21 +66,27 @@ class BodyTypeCarAdmin(admin.ModelAdmin):
     ordering = ('type_body',)
 
 
-@admin.register(ColorType)
-class ColorTypeAdmin(admin.ModelAdmin):
-    search_fields = ('color',)
-    list_display = ('color',)
-    ordering = ('color',)
-
-
 @admin.register(AnnouncementCar)
 class AnnouncementCarAdmin(admin.ModelAdmin):
     search_fields = ('car_brand', 'car_model', 'car_body')
-    list_display = ('car_brand',
-                    'car_model',
-                    'car_body',
-                    'car_engine_type',
-                    'car_transmission_type',
-                    'car_drive_unit_type'
-                    )
+    list_display = (
+        'car_brand',
+        'car_model',
+        'car_body',
+        'car_engine_type',
+        'car_transmission_type',
+        'car_drive_unit_type'
+    )
     ordering = ('car_brand', 'car_model', 'car_body')
+    prepopulated_fields = {
+        'announcement_car_slug': (
+            'car_brand',
+            'car_model',
+            'car_body',
+            'year_of_issue',
+            'mileage',
+            'price',
+            'car_transmission_type',
+            'car_drive_unit_type'
+        )
+    }
