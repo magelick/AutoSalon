@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView
 from .forms import RegisterUsersForm, AuthenticationUsersForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from .tasks import send_registration_message_for_email
 
 
 # Представление для регистрации новых пользователей
@@ -15,6 +16,7 @@ class SignUpView(CreateView):
 
         if form.is_valid():
             form.save()
+            send_registration_message_for_email.delay(email=form.cleaned_data['email'])
             return redirect('login')
         else:
             return render(

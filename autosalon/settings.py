@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +24,11 @@ SECRET_KEY = 'django-insecure-urv_$^55e2j!hm#=b+9zkddjrzgbklnk3gj-1jdrm)znnr_(do
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0"]
+
+
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
 
 
 # Application definition
@@ -36,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'shop.apps.ShopConfig',
     'transport.apps.TransportConfig',
     'users.apps.UsersConfig',
@@ -80,7 +85,7 @@ DATABASES = {
         'NAME': 'autosalon',
         'USER': 'admin1',
         'PASSWORD': '1234567890',
-        'HOST': '0.0.0.0',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
