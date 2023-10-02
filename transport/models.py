@@ -182,7 +182,6 @@ class AnnouncementCar(models.Model):
     equipment = models.TextField(verbose_name='Комплектация')
     announcement_car_slug = models.SlugField(
         max_length=200,
-        default=False,
         blank=False,
         null=False
     )

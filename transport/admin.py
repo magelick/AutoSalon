@@ -66,6 +66,12 @@ class BodyTypeCarAdmin(admin.ModelAdmin):
     ordering = ('type_body',)
 
 
+@admin.register(ColorType)
+class ColorTypeAdmin(admin.ModelAdmin):
+    list_display = ('color',)
+    ordering = ('color',)
+
+
 @admin.register(AnnouncementCar)
 class AnnouncementCarAdmin(admin.ModelAdmin):
     search_fields = ('car_brand', 'car_model', 'car_body')
