@@ -29,8 +29,8 @@ class BrandCar(models.Model):
         verbose_name = 'бренд'
         verbose_name_plural = 'бренды'
         constraints = (
-            models.CheckConstraint(check=Q(brand_name__lenght__lte=50), name="brand_name__lenght__lte"),
-            models.CheckConstraint(check=Q(brand_name__lengt__gte=0), name="brand_name__lenght__gte")
+            models.CheckConstraint(check=Q(brand_name__length__lte=50), name="brand_name__length__lte"),
+            models.CheckConstraint(check=Q(brand_name__length__gte=0), name="brand_name__length__gte")
         )
 
 
@@ -63,8 +63,8 @@ class ModelCar(models.Model):
         verbose_name = 'модель'
         verbose_name_plural = 'модели'
         constraints = (
-            models.CheckConstraint(check=Q(model_name__lenght__lte=50), name="model_name__length__lte"),
-            models.CheckConstraint(check=Q(model_name__lenght__gte=0), name="model_name__lenght__gte")
+            models.CheckConstraint(check=Q(model_name__length__lte=50), name="model_name__length__lte"),
+            models.CheckConstraint(check=Q(model_name__length__gte=0), name="model_name__length__gte")
         )
 
 
@@ -97,8 +97,8 @@ class BodyCar(models.Model):
         verbose_name = 'кузов'
         verbose_name_plural = 'кузова'
         constraints = (
-            models.CheckConstraint(check=Q(body_name__lenght__lte=50), name="body_name__lenght__lte"),
-            models.CheckConstraint(check=Q(body_name__lenght__gte=0), name="body_name__lenght__gte")
+            models.CheckConstraint(check=Q(body_name__length__lte=50), name="body_name__length__lte"),
+            models.CheckConstraint(check=Q(body_name__length__gte=0), name="body_name__length__gte")
         )
 
 
@@ -119,8 +119,8 @@ class EngineTypeCar(models.Model):
         verbose_name = 'тип двигателя'
         verbose_name_plural = 'типы двигателей'
         constraints = (
-            models.CheckConstraint(check=Q(engine__lenght__lte=20), name="engine__lenght__lte"),
-            models.CheckConstraint(check=Q(engine__lenght__gte=0), name="engine__lenght__gte")
+            models.CheckConstraint(check=Q(engine__length__lte=20), name="engine__length__lte"),
+            models.CheckConstraint(check=Q(engine__length__gte=0), name="engine__length__gte")
         )
 
 
@@ -141,8 +141,8 @@ class TransmissionType(models.Model):
         verbose_name = 'коробка передач'
         verbose_name_plural = 'коробки передач'
         constraints = (
-            models.CheckConstraint(check=Q(transmission__lenght__lte=20), name="transmission__lenght__lte"),
-            models.CheckConstraint(check=Q(transmission__lenght__gte=0), name="transmission__lenght__gte")
+            models.CheckConstraint(check=Q(transmission__length__lte=20), name="transmission__length__lte"),
+            models.CheckConstraint(check=Q(transmission__length__gte=0), name="transmission__length__gte")
         )
 
 
@@ -163,8 +163,8 @@ class DriveUnitType(models.Model):
         verbose_name = 'тип привода'
         verbose_name_plural = 'типы приводов'
         constraints = (
-            models.CheckConstraint(check=Q(drive_unit__lenght__lte=20), name="drive_unit__lenght__lte"),
-            models.CheckConstraint(check=Q(drive_unit__lenght__gte=0), name="drive_unit__lenght__gte")
+            models.CheckConstraint(check=Q(drive_unit__length__lte=20), name="drive_unit__length__lte"),
+            models.CheckConstraint(check=Q(drive_unit__length__gte=0), name="drive_unit__length__gte")
         )
 
 
@@ -185,8 +185,8 @@ class BodyTypeCar(models.Model):
         verbose_name = 'тип кузова'
         verbose_name_plural = 'типы кузова'
         constraints = (
-            models.CheckConstraint(check=Q(body_type__lenght__lte=50), name="body_type__lenght__lte"),
-            models.CheckConstraint(check=Q(body_type__lenght__gte=0), name="body_type__lenght__gte")
+            models.CheckConstraint(check=Q(body_type__length__lte=50), name="body_type__length__lte"),
+            models.CheckConstraint(check=Q(body_type__length__gte=0), name="body_type__length__gte")
         )
 
 
@@ -207,8 +207,8 @@ class ColorType(models.Model):
         verbose_name = 'цвет'
         verbose_name_plural = 'цвета'
         constraints = (
-            models.CheckConstraint(check=Q(color__lenght__lte=50), name="color__lenght__lte"),
-            models.CheckConstraint(check=Q(color__lenght__gte=0), name="color__lenght__gte")
+            models.CheckConstraint(check=Q(color__length__lte=50), name="color__length__lte"),
+            models.CheckConstraint(check=Q(color__length__gte=0), name="color__length__gte")
         )
 
 
@@ -282,7 +282,7 @@ class AnnouncementCar(models.Model):
         verbose_name_plural = 'объявления'
         constraints = (
             models.CheckConstraint(check=Q(year_of_issue__lte=datetime.now().year), name="year_of_issue__lte"),
-            models.CheckConstraint(check=Q(engine_volume__ge=0), name="engine_volume__ge"),
+            models.CheckConstraint(check=Q(engine_volume__gte=0), name="engine_volume__ge"),
         )
 
 

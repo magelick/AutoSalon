@@ -4,7 +4,7 @@ from .views import AnnouncementCarApiView
 
 router = routers.DefaultRouter()
 
-router.register(r'announcements', AnnouncementCarApiView)
+router.register(r'announcements/v1', AnnouncementCarApiView)
 
 urlpatterns = [
     path('', include(router.urls))

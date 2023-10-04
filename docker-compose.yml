@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: autosalon
+    container_name: "autosalon"
     ports:
       - "8001:8000"
     environment:
@@ -14,10 +14,11 @@ services:
       - SECRET_KEY=django-insecure-urv_$^55e2j!hm#=b+9zkddjrzgbklnk3gj-1jdrm)znnr_(do
       - DEBUG=1
       - ALLOWED_HOSTS=0.0.0.0|127.0.0.1
-      - POSTGRES_NAME=autosalon
-      - POSTGRES_USER=admin
+      - POSTGRES_DB=autosalon
+      - POSTGRES_USER=admin1
       - POSTGRES_PASSWORD=1234567890
       - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
 
     command: python manage.py runserver 0.0.0.0:8000
     restart: always
@@ -30,15 +31,16 @@ services:
 
   db:
     image: postgres:15.3-alpine
-    container_name: autosalon-postgres
+    container_name: "autosalon-postgres"
+    hostname: db
     restart: always
     volumes:
       - .:/data/db/var/lib/postgresql/data
     environment:
-      - POSTGRES_NAME=autosalon
+      - POSTGRES_DB=autosalon
       - POSTGRES_PASSWORD=1234567890
       - POSTGRES_USER=admin1
-      - POSTGRES_PORT=5432
+      - POSTGRES_HOST_AUTH_METHOD=trust
 
   redis:
     image: redis:7.0.4-alpine
@@ -51,7 +53,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: autosalon-celery-worker
+    container_name: "autosalon-celery-worker"
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/1
