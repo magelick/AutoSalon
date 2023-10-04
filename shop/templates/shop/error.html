@@ -1,0 +1,11 @@
+{% extends 'shop/base.html' %}
+
+{% for er in errors %}
+    {% block title %}{{ er }}{% endblock %}
+{% endfor %}
+
+{% block content %}
+
+    {% include 'shop/components_error/breadcrumb.html' %}
+
+{% endblock %}

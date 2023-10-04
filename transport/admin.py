@@ -4,7 +4,7 @@ from .models import (
     BrandCar,
     ModelCar,
     BodyCar,
-    EngineType,
+    EngineTypeCar,
     BodyTypeCar,
     ColorType,
     TransmissionType,
@@ -15,37 +15,37 @@ from .models import (
 
 @admin.register(BrandCar)
 class BrandAdmin(admin.ModelAdmin):
-    search_fields = ('brand',)
+    search_fields = ('brand_name',)
     prepopulated_fields = {
-        'slug': ('brand',)
+        'slug': ('brand_name',)
     }
-    ordering = ('brand',)
+    ordering = ('brand_name',)
 
 
 @admin.register(ModelCar)
 class ModelAdmin(admin.ModelAdmin):
-    search_fields = ('model',)
-    list_display = ('model', 'brand')
+    search_fields = ('model_name',)
+    list_display = ('model_name', 'brand')
     prepopulated_fields = {
-        'slug': ('model',)
+        'slug': ('model_name',)
     }
     ordering = ('brand',)
 
 
 @admin.register(BodyCar)
 class BodyAdmin(admin.ModelAdmin):
-    search_fields = ('body',)
-    list_display = ('body', 'model')
+    search_fields = ('body_name',)
+    list_display = ('body_name', 'model')
     prepopulated_fields = {
-        'slug': ('body',)
+        'slug': ('body_name',)
     }
     ordering = ('model',)
 
 
-@admin.register(EngineType)
+@admin.register(EngineTypeCar)
 class EngineTypeAdmin(admin.ModelAdmin):
-    list_display = ('engine_type',)
-    ordering = ('engine_type',)
+    list_display = ('engine',)
+    ordering = ('engine',)
 
 
 @admin.register(TransmissionType)
@@ -62,8 +62,8 @@ class DriveUnitTypeAdmin(admin.ModelAdmin):
 
 @admin.register(BodyTypeCar)
 class BodyTypeCarAdmin(admin.ModelAdmin):
-    list_display = ('type_body',)
-    ordering = ('type_body',)
+    list_display = ('body_type',)
+    ordering = ('body_type',)
 
 
 @admin.register(ColorType)
@@ -85,7 +85,7 @@ class AnnouncementCarAdmin(admin.ModelAdmin):
     )
     ordering = ('car_brand', 'car_model', 'car_body')
     prepopulated_fields = {
-        'announcement_car_slug': (
+        'slug': (
             'car_brand',
             'car_model',
             'car_body',

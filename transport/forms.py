@@ -32,6 +32,9 @@ class SearchCarsForm(forms.Form):
     body_type = forms.ChoiceField(
         required=False
     )
-    # price = forms.CharField(
-    #     required=False
-    # )
+    min_price = forms.IntegerField(
+        required=False
+    )
+    max_price = forms.IntegerField(
+        required=False
+    )

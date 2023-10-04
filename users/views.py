@@ -6,10 +6,10 @@ from django.shortcuts import render, redirect
 from .tasks import send_registration_message_for_email
 
 
-# Представление для регистрации новых пользователей
-class SignUpView(CreateView):
+class RegisterUsersView(CreateView):
+    """ Представление для регистрации новых пользователей"""
     form_class = RegisterUsersForm
-    template_name = 'users/sign_up.html'
+    template_name = 'users/register.html'
 
     def post(self, request, *args, **kwargs):
         form = RegisterUsersForm(request.POST)
@@ -26,8 +26,8 @@ class SignUpView(CreateView):
             )
 
 
-# Представление для входа пользователя
-class CustomLoginView(LoginView):
+class LoginUsersView(LoginView):
+    """ Представление для входа пользователей"""
     form_class = AuthenticationUsersForm
     template_name = 'users/login.html'
 
