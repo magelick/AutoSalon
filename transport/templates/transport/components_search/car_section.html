@@ -105,15 +105,14 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="car__item">
                             <div class="car__item__pic__slider owl-carousel">
-                                <img src="{% static 'autosalon/img/cars/car-1.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-8.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-6.jpg' %}" alt="">
-                                <img src="{% static 'autosalon/img/cars/car-3.jpg' %}" alt="">
+                                {% for image in car.images.all %}
+                                    <img src="{{ image.image.url }}" alt="Фото объявления">
+                                {% endfor %}
                             </div>
                             <div class="car__item__text">
                                 <div class="car__item__text__inner">
                                     <div class="label-date">{{ car.year_of_issue }} г.</div>
-                                    <h5><a href="{% url 'car_details' slug=car.announcement_car_slug %}">{{ car.car_brand }} {{ car.car_model }} {{ car.car_body }}</a></h5>
+                                    <h5><a href="{% url 'car_details' slug=car.slug %}">{{ car.car_brand }} {{ car.car_model }} {{ car.car_body }}</a></h5>
                                         <ul>Пробег: {{ car.mileage }} км</ul>
                                         <ul>Коробка передач: {{ car.car_transmission_type }}</ul>
                                         <ul>Привод: {{ car.car_drive_unit_type }}</ul>

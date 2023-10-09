@@ -30,15 +30,15 @@ class CarSearchListView(ListView):
     def _search_cars_form(self):
         form = SearchCarsForm(self.request.GET)
         brands = AnnouncementCar.objects.all()
-        form.fields['brand'].choices = ((brand.car_brand.slug, brand.car_brand.brand) for brand in brands)
+        form.fields['brand'].choices = ((brand.car_brand.slug, brand.car_brand.brand_name) for brand in brands)
 
         if self.request.GET.get('brand'):
             models = AnnouncementCar.objects.filter(car_model__slug=self.request.GET.get('model'))
-            form.fields['model'].choices = ((model.slug, model.model) for model in models)
+            form.fields['model'].choices = ((model.slug, model.model_name) for model in models)
 
         if self.request.GET.get('model'):
             bodies = AnnouncementCar.objects.filter(car_body__slug=self.request.GET.get('body'))
-            form.fields['body'].choices = ((body.slug, body.body) for body in bodies)
+            form.fields['body'].choices = ((body.slug, body.body_name) for body in bodies)
 
         return form
 
@@ -48,7 +48,7 @@ class CarSearchListView(ListView):
         return context
 
 
-class CarDetailView(DetailView):
+class CarDetailView(ListView):
     model = AnnouncementCar
     template_name = 'transport/car.html'
     context_object_name = 'car_details'

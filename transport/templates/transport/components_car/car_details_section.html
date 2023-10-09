@@ -4,25 +4,30 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9">
+                {% for car in car_details %}
                 <div class="car__details__pic">
                     <div class="car__details__pic__large">
                         <img class="car-big-img" src="{% static 'autosalon/img/cars/details/cd-1.jpg' %}" alt="">
                     </div>
                     <div class="car-thumbs">
                         <div class="car-thumbs-track car__thumb__slider owl-carousel">
-                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-2.jpg' %}"><img
-                                    src="{% static 'autosalon/img/cars/details/sm-1.jpg' %}" alt=""></div>
-                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-3.jpg' %}"><img
-                                    src="{% static 'autosalon/img/cars/details/sm-2.jpg' %}" alt=""></div>
-                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-4.jpg' %}"><img
-                                    src="{% static 'autosalon/img/cars/details/sm-3.jpg' %}" alt=""></div>
-                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-5.jpg' %}"><img
-                                    src="{% static 'autosalon/img/cars/details/sm-4.jpg' %}" alt=""></div>
-                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-6.jpg' %}"><img
-                                    src="{% static 'autosalon/img/cars/details/sm-5.jpg' %}" alt=""></div>
+                            {% for image in car.images.all %}
+                            <div class="ct" data-imgbigurl="{{ image.image.url }}">
+                                <img src="{{ image.image.url }}" alt="">
+                            </div>
+<!--                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-3.jpg' %}"><img-->
+<!--                                    src="{% static 'autosalon/img/cars/details/sm-2.jpg' %}" alt=""></div>-->
+<!--                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-4.jpg' %}"><img-->
+<!--                                    src="{% static 'autosalon/img/cars/details/sm-3.jpg' %}" alt=""></div>-->
+<!--                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-5.jpg' %}"><img-->
+<!--                                    src="{% static 'autosalon/img/cars/details/sm-4.jpg' %}" alt=""></div>-->
+<!--                            <div class="ct" data-imgbigurl="{% static 'autosalon/img/cars/details/cd-6.jpg' %}"><img-->
+<!--                                    src="{% static 'autosalon/img/cars/details/sm-5.jpg' %}" alt=""></div>-->
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
+                {% endfor %}
                 <div class="car__details__tab">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
@@ -60,7 +65,9 @@
                                                 <h5>Комплектация</h5>
                                                 <ul>
                                                     {% for car in car_details %}
-                                                        <li><h6>{{ car.equipment }}</h6></li>
+                                                        {% for item in car.equipment.all %}
+                                                        <li><h6>{{ item }}</h6></li>
+                                                        {% endfor %}
                                                     {% endfor %}
                                                 </ul>
                                             </div>

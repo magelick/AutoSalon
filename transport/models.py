@@ -292,7 +292,7 @@ class AnnouncementCarImage(models.Model):
     )
     announcement_car = models.ForeignKey(
         to="AnnouncementCar",
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_index=True,
         related_name="images",
     )
@@ -445,8 +445,12 @@ class ClimateControlType(models.Model):
         max_length=64,
         blank=False,
         null=False,
-        unique=True
+        unique=True,
+        verbose_name="климат-контроль"
     )
+
+    def __str__(self):
+        return self.climate_control_name
 
     class Meta:
         verbose_name = 'климат-контроль'
@@ -454,7 +458,8 @@ class ClimateControlType(models.Model):
         constraints = (
             models.CheckConstraint(check=Q(climate_control_name__length__lte=64),
                                    name="climate_control_name__length__lte"),
-            models.CheckConstraint(check=Q(climate_control_name__gte=0), name="climate_control_name__length__gte")
+            models.CheckConstraint(check=Q(climate_control_name__length__gte=0),
+                                   name="climate_control_name__length__gte")
         )
 
 
@@ -463,15 +468,19 @@ class BluetoothType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="bluetooth-система"
     )
+
+    def __str__(self):
+        return self.bluetooth_name
 
     class Meta:
         verbose_name = 'bluetooth-система'
         verbose_name_plural = 'bluetooth-системы'
         constraints = (
-            models.CheckConstraint(check=Q(bluetooth_name__lte=64), name="bluetooth_name__length__lte"),
-            models.CheckConstraint(check=Q(bluetooth_name__gte=0), name="bluetooth_name__length__gte")
+            models.CheckConstraint(check=Q(bluetooth_name__length__lte=50), name="bluetooth_name__length__lte"),
+            models.CheckConstraint(check=Q(bluetooth_name__length__gte=0), name="bluetooth_name__length__gte")
         )
 
 
@@ -480,15 +489,19 @@ class RaisSensorType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="датчик дождя"
     )
+
+    def __str__(self):
+        return self.rain_sensor_name
 
     class Meta:
         verbose_name = 'датчик дождя'
         verbose_name_plural = 'датчики дождя'
         constraints = (
-            models.CheckConstraint(check=Q(rain_sensor_name__lte=64), name="rain_sensor_name__length__lte"),
-            models.CheckConstraint(check=Q(rain_sensor_name__gte=0), name="rain_sensor_name__length__gte")
+            models.CheckConstraint(check=Q(rain_sensor_name__length__lte=50), name="rain_sensor_name__length__lte"),
+            models.CheckConstraint(check=Q(rain_sensor_name__length__gte=0), name="rain_sensor_name__length__gte")
         )
 
 
@@ -497,15 +510,19 @@ class LightSensorType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="датчик света"
     )
+
+    def __str__(self):
+        return self.light_sensor_name
 
     class Meta:
         verbose_name = 'датчик света'
         verbose_name_plural = 'датчики света'
         constraints = (
-            models.CheckConstraint(check=Q(light_sensor_name__lte=64), name="light_sensor_name__length__lte"),
-            models.CheckConstraint(check=Q(light_sensor_name__gte=0), name="light_sensor_name__length__gte")
+            models.CheckConstraint(check=Q(light_sensor_name__length__lte=50), name="light_sensor_name__length__lte"),
+            models.CheckConstraint(check=Q(light_sensor_name__length__gte=0), name="light_sensor_name__length__gte")
         )
 
 
@@ -514,15 +531,19 @@ class StartStopType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="система start-stop"
     )
+
+    def __str__(self):
+        return self.start_stop_name
 
     class Meta:
         verbose_name = 'система start-stop'
         verbose_name_plural = 'системы start-stop'
         constraints = (
-            models.CheckConstraint(check=Q(start_stop_name__lte=64), name="start_stop_name__length__lte"),
-            models.CheckConstraint(check=Q(start_stop_name__gte=0), name="start_stop_name__length__gte")
+            models.CheckConstraint(check=Q(start_stop_name__length__lte=50), name="start_stop_name__length__lte"),
+            models.CheckConstraint(check=Q(start_stop_name__length__gte=0), name="start_stop_name__length__gte")
         )
 
 
@@ -531,15 +552,19 @@ class HeatedSeatsType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="подогрев сидений"
     )
+
+    def __str__(self):
+        return self.heated_seats_name
 
     class Meta:
         verbose_name = 'подогрев сидения'
         verbose_name_plural = 'подогрев сидений'
         constraints = (
-            models.CheckConstraint(check=Q(heated_seats_name__lte=64), name="heated_seats_name__length__lte"),
-            models.CheckConstraint(check=Q(heated_seats_name__gte=0), name="heated_seats_name__length__gte")
+            models.CheckConstraint(check=Q(heated_seats_name__length__lte=50), name="heated_seats_name__length__lte"),
+            models.CheckConstraint(check=Q(heated_seats_name__length__gte=0), name="heated_seats_name__length__gte")
         )
 
 
@@ -548,15 +573,21 @@ class VentilationSeatsType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="вентиляция сидений"
     )
 
+    def __str__(self):
+        return self.ventilation_seats_name
+
     class Meta:
-        verbose_name = 'подогрев сидения'
-        verbose_name_plural = 'подогрев сидений'
+        verbose_name = 'вентиляция сидения'
+        verbose_name_plural = 'вентиляция сидений'
         constraints = (
-            models.CheckConstraint(check=Q(ventilation_seats_name__lte=64), name="ventilation_seats_name__length__lte"),
-            models.CheckConstraint(check=Q(ventilation_seats_name__gte=0), name="ventilation_seats_name__length__gte")
+            models.CheckConstraint(check=Q(ventilation_seats_name__length__lte=50),
+                                   name="ventilation_seats_name__length__lte"),
+            models.CheckConstraint(check=Q(ventilation_seats_name__length__gte=0),
+                                   name="ventilation_seats_name__length__gte")
         )
 
 
@@ -565,15 +596,21 @@ class AdjustmentsSeatsType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="регулировка сидений"
     )
+
+    def __str__(self):
+        return self.adjustments_seats_name
 
     class Meta:
         verbose_name = 'регулировка сидения'
         verbose_name_plural = 'регулировка сидений'
         constraints = (
-            models.CheckConstraint(check=Q(adjustments_seats_name__lte=64), name="adjustments_seats_name__length__lte"),
-            models.CheckConstraint(check=Q(adjustments_seats_name__gte=0), name="adjustments_seats_name__length__gte")
+            models.CheckConstraint(check=Q(adjustments_seats_name__length__lte=50),
+                                   name="adjustments_seats_name__length__lte"),
+            models.CheckConstraint(check=Q(adjustments_seats_name__length__gte=0),
+                                   name="adjustments_seats_name__length__gte")
         )
 
 
@@ -582,16 +619,20 @@ class BlindSpotMonitoringSystemType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="система контроля слепых зон"
     )
+
+    def __str__(self):
+        return self.blind_spot_monitoring_system_name
 
     class Meta:
         verbose_name = 'система контроля слепых зон'
         verbose_name_plural = 'системы контроля слепых зон'
         constraints = (
-            models.CheckConstraint(check=Q(blind_spot_monitoring_system_name__lte=64),
+            models.CheckConstraint(check=Q(blind_spot_monitoring_system_name__length__lte=50),
                                    name="blind_spot_monitoring_system_name__length__lte"),
-            models.CheckConstraint(check=Q(blind_spot_monitoring_system_name__gte=0),
+            models.CheckConstraint(check=Q(blind_spot_monitoring_system_name__length__gte=0),
                                    name="blind_spot_monitoring_system_name__length__gte")
         )
 
@@ -601,16 +642,20 @@ class CollisionAvoidanceSystemType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="система избежания столкновений"
     )
+
+    def __str__(self):
+        return self.collision_avoidance_system_name
 
     class Meta:
         verbose_name = 'система избежания столкновений'
         verbose_name_plural = 'системы избежания столкновений'
         constraints = (
-            models.CheckConstraint(check=Q(collision_avoidance_system_name__lte=64),
+            models.CheckConstraint(check=Q(collision_avoidance_system_name__length__lte=50),
                                    name="collision_avoidance_system_name__length__lte"),
-            models.CheckConstraint(check=Q(collision_avoidance_system_name__gte=0),
+            models.CheckConstraint(check=Q(collision_avoidance_system_name__length__gte=0),
                                    name="collision_avoidance_system_name__length__gte")
         )
 
@@ -620,16 +665,20 @@ class LaneDepartureWarningSystemType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="система предупреждения о сходе с полосы"
     )
+
+    def __str__(self):
+        return self.lane_departure_warning_system_name
 
     class Meta:
         verbose_name = 'система предупреждения о сходе с полосы'
         verbose_name_plural = 'системы предупреждения о сходе с полосы'
         constraints = (
-            models.CheckConstraint(check=Q(lane_departure_warning_system_name__lte=64),
+            models.CheckConstraint(check=Q(lane_departure_warning_system_name__length__lte=50),
                                    name="lane_departure_warning_system_name__length__lte"),
-            models.CheckConstraint(check=Q(lane_departure_warning_system_name__gte=0),
+            models.CheckConstraint(check=Q(lane_departure_warning_system_name__length__gte=0),
                                    name="lane_departure_warning_system_name__length__gte")
         )
 
@@ -639,15 +688,19 @@ class HeadlightsType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="тип фар"
     )
+
+    def __str__(self):
+        return self.headlights_name
 
     class Meta:
         verbose_name = 'тип фар'
         verbose_name_plural = 'типы фар'
         constraints = (
-            models.CheckConstraint(check=Q(headlights_name__lte=64), name="headlights_name__length__lte"),
-            models.CheckConstraint(check=Q(headlights_name__gte=0), name="headlights_name__length__gte")
+            models.CheckConstraint(check=Q(headlights_name__length__lte=50), name="headlights_name__length__lte"),
+            models.CheckConstraint(check=Q(headlights_name__length__gte=0), name="headlights_name__length__gte")
         )
 
 
@@ -656,15 +709,21 @@ class ParkingSensorsType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="датчик парковки"
     )
 
+    def __str__(self):
+        return self.parking_sensors_name
+
     class Meta:
-        verbose_name = 'тип фар'
-        verbose_name_plural = 'типы фар'
+        verbose_name = 'датчик парковки'
+        verbose_name_plural = 'датчики парковки'
         constraints = (
-            models.CheckConstraint(check=Q(parking_sensors_name__lte=64), name="parking_sensors_name__length__lte"),
-            models.CheckConstraint(check=Q(parking_sensors_name__gte=0), name="parking_sensors_name__length__gte")
+            models.CheckConstraint(check=Q(parking_sensors_name__length__lte=50),
+                                   name="parking_sensors_name__length__lte"),
+            models.CheckConstraint(check=Q(parking_sensors_name__length__gte=0),
+                                   name="parking_sensors_name__length__gte")
         )
 
 
@@ -673,15 +732,19 @@ class RoofCarType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="тип крышы"
     )
+
+    def __str__(self):
+        return self.roof_car_name
 
     class Meta:
         verbose_name = 'тип крышы'
         verbose_name_plural = 'типы крыш'
         constraints = (
-            models.CheckConstraint(check=Q(roof_car_name__lte=64), name="roof_car_name__lte"),
-            models.CheckConstraint(check=Q(roof_car_name__gte=0), name="roof_car_name__gte")
+            models.CheckConstraint(check=Q(roof_car_name__length__lte=50), name="roof_car_name__length__lte"),
+            models.CheckConstraint(check=Q(roof_car_name__length__gte=0), name="roof_car_name__gte")
         )
 
 
@@ -690,15 +753,19 @@ class SalonCarType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="тип салона"
     )
 
+    def __str__(self):
+        return self.salon_car_name
+
     class Meta:
-        verbose_name = 'тип салоны'
+        verbose_name = 'тип салона'
         verbose_name_plural = 'типы салона'
         constraints = (
-            models.CheckConstraint(check=Q(salon_car_name__lte=64), name="salon_car_name__lte"),
-            models.CheckConstraint(check=Q(salon_car_name__gte=0), name="salon_car_name__gte")
+            models.CheckConstraint(check=Q(salon_car_name__length__lte=50), name="salon_car_name__length__lte"),
+            models.CheckConstraint(check=Q(salon_car_name__length__gte=0), name="salon_car_name__length__gte")
         )
 
 
@@ -707,15 +774,21 @@ class ColorSalonCarType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="цвет салона"
     )
+
+    def __str__(self):
+        return self.color_salon_car_name
 
     class Meta:
         verbose_name = 'цвет салона'
         verbose_name_plural = 'цвета салона'
         constraints = (
-            models.CheckConstraint(check=Q(color_salon_car_name__lte=64), name="color_salon_car_name__lte"),
-            models.CheckConstraint(check=Q(color_salon_car_name__gte=0), name="color_salon_car_name__gte")
+            models.CheckConstraint(check=Q(color_salon_car_name__length__lte=50),
+                                   name="color_salon_car_name__length__lte"),
+            models.CheckConstraint(check=Q(color_salon_car_name__length__gte=0),
+                                   name="color_salon_car_name__length__gte")
         )
 
 
@@ -724,13 +797,17 @@ class BodyKitType(models.Model):
         max_length=50,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name="обвес"
     )
+
+    def __str__(self):
+        return self.body_kit_name
 
     class Meta:
         verbose_name = 'обвес'
         verbose_name_plural = 'обвесы'
         constraints = (
-            models.CheckConstraint(check=Q(body_kit_name__lte=64), name="body_kit_name__lte"),
-            models.CheckConstraint(check=Q(body_kit_name__gte=0), name="body_kit_name__gte")
+            models.CheckConstraint(check=Q(body_kit_name__length__lte=50), name="body_kit_name__length__lte"),
+            models.CheckConstraint(check=Q(body_kit_name__length__gte=0), name="body_kit_name__length__gte")
         )
