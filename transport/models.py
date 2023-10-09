@@ -51,7 +51,7 @@ class ModelCar(models.Model):
     )
     brand = models.ForeignKey(
         to="BrandCar",
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_index=True,
         related_name="models"
     )
@@ -85,7 +85,7 @@ class BodyCar(models.Model):
     )
     model = models.ForeignKey(
         to='ModelCar',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_index=True,
         related_name='bodies'
     )
@@ -212,6 +212,24 @@ class ColorType(models.Model):
         )
 
 
+class AnnouncementCarImage(models.Model):
+    image = models.ImageField(
+        upload_to="transport",
+        db_index=True,
+        verbose_name="фотографии объявлений"
+    )
+    announcement_car = models.ForeignKey(
+        to="AnnouncementCar",
+        on_delete=models.CASCADE,
+        db_index=True,
+        related_name="images",
+    )
+
+    class Meta:
+        verbose_name = 'фотографии автомобиля'
+        verbose_name_plural = 'фотографии автомобилей'
+
+
 class AnnouncementCar(models.Model):
     # Конкретное объявление
     car_brand = models.ForeignKey(
@@ -275,6 +293,9 @@ class AnnouncementCar(models.Model):
         unique=True
     )
 
+    def __str__(self):
+        return self.slug
+
     class Meta:
         verbose_name = 'объявление'
         verbose_name_plural = 'объявления'
@@ -282,24 +303,6 @@ class AnnouncementCar(models.Model):
             models.CheckConstraint(check=Q(year_of_issue__lte=datetime.now().year), name="year_of_issue__lte"),
             models.CheckConstraint(check=Q(engine_volume__gte=0), name="engine_volume__ge"),
         )
-
-
-class AnnouncementCarImage(models.Model):
-    image = models.ImageField(
-        upload_to="transport",
-        db_index=True,
-        verbose_name="фотографии объявлений"
-    )
-    announcement_car = models.ForeignKey(
-        to="AnnouncementCar",
-        on_delete=models.CASCADE,
-        db_index=True,
-        related_name="images",
-    )
-
-    class Meta:
-        verbose_name = 'фотографии автомобиля'
-        verbose_name_plural = 'фотографии автомобилей'
 
 
 class AnnouncementCarEquipment(models.Model):
@@ -351,8 +354,8 @@ class AnnouncementCarEquipment(models.Model):
         on_delete=models.DO_NOTHING,
         db_index=True,
         verbose_name="подогрев сидений",
-        null=False,
-        blank=False
+        null=True,
+        blank=True
     )
     ventilation_seats_car = models.ForeignKey(
         to="VentilationSeatsType",

@@ -124,8 +124,9 @@ class AnnouncementCarImageAdmin(admin.ModelAdmin):
 
 
 @admin.register(AnnouncementCarEquipment)
-class AnnouncementCarAdmin(admin.ModelAdmin):
+class AnnouncementCarEquipmentAdmin(admin.ModelAdmin):
     list_display = (
+        'equipment_car',
         'climate_control_car',
         'bluetooth_car',
         'rain_sensor_car',

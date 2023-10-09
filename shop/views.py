@@ -1,7 +1,8 @@
 from django.views.generic import TemplateView
 from .forms import ContactForm
 from .tasks import send_message_of_the_autosalon
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 
 class ShopListView(TemplateView):
@@ -26,11 +27,15 @@ class ContactTemplateView(TemplateView):
         form = ContactForm(request.POST)
 
         if form.is_valid():
-            send_message_of_the_autosalon.delay(
-                subject=form.cleaned_data['topic_of_the_question'],
-                message=form.cleaned_data['question'],
-                from_email=form.cleaned_data['email']
-            )
+            if request.user.is_authenticated:
+                send_message_of_the_autosalon.delay(
+                    subject=form.cleaned_data['topic_of_the_question'],
+                    message=form.cleaned_data['question'],
+                    from_email=form.cleaned_data['email']
+                )
+            else:
+                messages.error(request, 'Вы не авторизованы!')
+                return redirect('login/')
         else:
             return render(
                 request=request,

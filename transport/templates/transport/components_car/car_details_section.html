@@ -64,10 +64,23 @@
                                             <div class="car__details__tab__feature__item">
                                                 <h5>Комплектация</h5>
                                                 <ul>
-                                                    {% for car in car_details %}
-                                                        {% for item in car.equipment.all %}
-                                                        <li><h6>{{ item }}</h6></li>
-                                                        {% endfor %}
+                                                    {% for equipment in equipment_data %}
+                                                        <li><h6>{{ equipment.climate_control_car }}</h6></li>
+                                                        <li><h6>{{ equipment.bluetooth_car }}</h6></li>
+                                                        <li><h6>{{ equipment.rain_sensor_car }}</h6></li>
+                                                        <li><h6>{{ equipment.light_sensor_car }}</h6></li>
+                                                        <li><h6>{{ equipment.start_stop_car }}</h6></li>
+                                                        <li><h6>{{ equipment.heated_seats_car }}</h6></li>
+                                                        <li><h6>{{ equipment.ventilation_seats_car }}</h6></li>
+                                                        <li><h6>{{ equipment.adjustments_seats_car }}</h6></li>
+                                                        <li><h6>{{ equipment.blind_spot_monitoring_system_car }}</h6></li>
+                                                        <li><h6>{{ equipment.collision_avoidance_system_car }}</h6></li>
+                                                        <li><h6>{{ equipment.lane_departure_warning_system_car }}</h6></li>
+                                                        <li><h6>{{ equipment.headlights_car }}</h6></li>
+                                                        <li><h6>{{ equipment.parking_sensors_car }}</h6></li>
+                                                        <li><h6>{{ equipment.roof_car }}</h6></li>
+                                                        <li><h6>{{ equipment.salon_car }}</h6></li>
+                                                        <li><h6>{{ equipment.body_kit_car }}</h6></li>
                                                     {% endfor %}
                                                 </ul>
                                             </div>
