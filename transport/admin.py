@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.text import slugify
 
 from .models import (
     BrandCar,
@@ -148,6 +149,7 @@ class AnnouncementCarEquipmentAdmin(admin.ModelAdmin):
         'equipment_car',
         'climate_control_name',
         'bluetooth_name',
+        'music_system_name',
         'rain_sensor_name',
         'light_sensor_name',
         'start_stop_name',
@@ -164,10 +166,10 @@ class AnnouncementCarEquipmentAdmin(admin.ModelAdmin):
         'color_salon_car_name',
         'body_kit_name'
     )
-    ordering = ('equipment_car', )
+    ordering = ('equipment_car',)
 
 
 @admin.register(EquipmentCar)
 class EquipmentCarAdmin(admin.ModelAdmin):
-    list_display = ('characteristic', )
-    ordering = ('characteristic', )
+    list_display = ('characteristic',)
+    ordering = ('characteristic',)

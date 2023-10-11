@@ -1,7 +1,8 @@
 from django import forms
+from .models import AnnouncementCar
 
 
-class SearchCarsForm(forms.Form):
+class SelectCarsForm(forms.Form):
     brand = forms.ChoiceField(
         required=False
     )
@@ -36,5 +37,11 @@ class SearchCarsForm(forms.Form):
         required=False
     )
     max_price = forms.IntegerField(
+        required=False
+    )
+
+
+class SearchCarForm(forms.Form):
+    car = forms.CharField(
         required=False
     )

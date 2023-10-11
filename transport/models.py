@@ -2,6 +2,7 @@ from datetime import datetime
 from django.db.models.functions import Length
 from django.db import models
 from django.db.models import Q
+from django.utils.text import slugify
 
 models.CharField.register_class_lookup(Length)
 
@@ -300,6 +301,7 @@ class AnnouncementCarImage(models.Model):
         on_delete=models.CASCADE,
         db_index=True,
         related_name="images",
+        verbose_name="объявление"
     )
 
     class Meta:
@@ -355,7 +357,7 @@ class AnnouncementCar(models.Model):
         to="ColorType",
         on_delete=models.DO_NOTHING,
         db_index=True,
-        verbose_name='цвет',
+        verbose_name='цвет кузова',
     )
     car_year_of_issue_type = models.ForeignKey(
         to="YearOfIssueType",
@@ -382,6 +384,13 @@ class AnnouncementCar(models.Model):
 
     def __str__(self):
         return self.slug
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        self.slug = slugify(
+            f"{self.car_brand} {self.car_model} {self.car_body} {self.car_year_of_issue_type} {self.car_mileage_type} {self.price} {self.car_transmission_type} {self.car_drive_unit_type}"
+        )
 
     class Meta:
         verbose_name = 'объявление'
@@ -416,6 +425,15 @@ class AnnouncementCarEquipment(models.Model):
         blank=True,
         related_name="bluetooth_name_announcement",
         verbose_name="bluetooth-система"
+    )
+    music_system_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="music_system_name_announcement",
+        verbose_name="Аудиосистема"
     )
     rain_sensor_name = models.ForeignKey(
         to="EquipmentCar",
@@ -523,7 +541,7 @@ class AnnouncementCarEquipment(models.Model):
         null=True,
         blank=True,
         related_name="roof_car_name_announcement",
-        verbose_name="характеристики комплектации"
+        verbose_name="тип крыши"
     )
     salon_car_name = models.ForeignKey(
         to="EquipmentCar",

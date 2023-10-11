@@ -7,8 +7,9 @@
                 <div class="car__sidebar">
                     <div class="car__search">
                         <h5>Поиск авто</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Марка, модель....">
+                        <form action="get">
+                            {{ form2.car }}
+<!--                            <input type="text" placeholder="Марка, модель....">-->
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -81,9 +82,9 @@
                             </div>
                             <div class="car__item__text">
                                 <div class="car__item__text__inner">
-                                    <div class="label-date">{{ car.year_of_issue }} г.</div>
+                                    <div class="label-date">{{ car.car_year_of_issue_type }} г.</div>
                                     <h5><a href="{% url 'car_details' slug=car.slug %}">{{ car.car_brand }} {{ car.car_model }} {{ car.car_body }}</a></h5>
-                                        <ul>Пробег: {{ car.mileage }} км</ul>
+                                        <ul>Пробег: {{ car.car_mileage_type }} км</ul>
                                         <ul>Коробка передач: {{ car.car_transmission_type }}</ul>
                                         <ul>Привод: {{ car.car_drive_unit_type }}</ul>
                                         <ul>Объём: {{ car.engine_volume }} л</ul>
