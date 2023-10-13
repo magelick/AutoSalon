@@ -52,7 +52,7 @@ class ModelCar(models.Model):
     )
     brand = models.ForeignKey(
         to="BrandCar",
-        on_delete=models.CASCADE,
+        on_delete=models.DO_NOTHING,
         db_index=True,
         related_name="models"
     )
@@ -386,11 +386,12 @@ class AnnouncementCar(models.Model):
         return self.slug
 
     def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
+            self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.slug = slugify(
             f"{self.car_brand} {self.car_model} {self.car_body} {self.car_year_of_issue_type} {self.car_mileage_type} {self.price} {self.car_transmission_type} {self.car_drive_unit_type}"
         )
+        super().save(self, force_update=False, using=None, update_fields=None)
 
     class Meta:
         verbose_name = 'объявление'
@@ -433,7 +434,7 @@ class AnnouncementCarEquipment(models.Model):
         null=True,
         blank=True,
         related_name="music_system_name_announcement",
-        verbose_name="Аудиосистема"
+        verbose_name="aудиосистема"
     )
     rain_sensor_name = models.ForeignKey(
         to="EquipmentCar",
@@ -462,6 +463,24 @@ class AnnouncementCarEquipment(models.Model):
         related_name="start_stop_name_announcement",
         verbose_name="система start-stop"
     )
+    key_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="key_name_announcement",
+        verbose_name="тип ключа"
+    )
+    door_closer_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="door_closer_name_announcement",
+        verbose_name="тип ключа"
+    )
     heated_seats_name = models.ForeignKey(
         to="EquipmentCar",
         on_delete=models.DO_NOTHING,
@@ -488,6 +507,114 @@ class AnnouncementCarEquipment(models.Model):
         blank=True,
         related_name="adjustments_seats_name_announcement",
         verbose_name="регулировка сидений"
+    )
+    massage_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="massage_name_announcement",
+        verbose_name="массаж сидений"
+    )
+    projection_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="projection_name_announcement",
+        verbose_name="проекция"
+    )
+    suspension_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="suspension_name_announcement",
+        verbose_name="тип подвески"
+    )
+    tinting_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="tinting_name_announcement",
+        verbose_name="тип тонировки"
+    )
+    brake_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="brake_name_announcement",
+        verbose_name="тип тормозов"
+    )
+    directional_stability_system_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="directional_stability_system_name_announcement",
+        verbose_name="система курсовой устойчивости"
+    )
+    brake_assist_system_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="brake_assist_system_name_announcement",
+        verbose_name="cистема помощи при торможении"
+    )
+    automatic_parking_system_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="automatic_parking_system_name_announcement",
+        verbose_name="cистема автоматической парковки"
+    )
+    traffic_sign_recognition_system_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="traffic_sign_recognition_system_name_announcement",
+        verbose_name="cистема распознования дорожных знаков"
+    )
+    active_lane_keeping_assist_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="active_lane_keeping_assist_name_announcement",
+        verbose_name="cистема удержания в полосе"
+    )
+    night_vision_system_with_pedestrian_detection_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="night_vision_system_with_pedestrian_detection_name_announcement",
+        verbose_name="cистема ночного видения с функцией распознавания пешеходов"
+    )
+    hill_start_assist_system_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="hill_start_assist_system_name_announcement",
+        verbose_name="cистема помощи при старте в гору"
     )
     blind_spot_monitoring_system_name = models.ForeignKey(
         to="EquipmentCar",
@@ -516,6 +643,60 @@ class AnnouncementCarEquipment(models.Model):
         related_name="lane_departure_warning_system_name_announcement",
         verbose_name="система предупреждения о сходе с полосы"
     )
+    wireless_charging_for_smartphone_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="wireless_charging_for_smartphone_name_announcement",
+        verbose_name="беспроводная зарядка для смартфона"
+    )
+    contactless_trunk_opening_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="contactless_trunk_opening_name_announcement",
+        verbose_name="бесконтактное открытие багажника"
+    )
+    electric_trunk_lid_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="electric_trunk_lid_name_announcement",
+        verbose_name="электропривод крышки багажника"
+    )
+    remote_engine_start_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="remote_engine_start_name_announcement",
+        verbose_name="дистанционный запуск двигателя"
+    )
+    remote_control_car_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="remote_control_car_name_announcement",
+        verbose_name="дистанционное управление автомобилем"
+    )
+    navigation_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="navigation_name_announcement",
+        verbose_name="дистанционное управление автомобилем"
+    )
     headlights_name = models.ForeignKey(
         to="EquipmentCar",
         on_delete=models.DO_NOTHING,
@@ -534,6 +715,24 @@ class AnnouncementCarEquipment(models.Model):
         related_name="parking_sensors_name_announcement",
         verbose_name="датчик парковки"
     )
+    cameras_system_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="cameras_system_name_announcement",
+        verbose_name="тип камеры"
+    )
+    interior_lighting_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="interior_lighting_name_announcement",
+        verbose_name="подсветка салона"
+    )
     roof_car_name = models.ForeignKey(
         to="EquipmentCar",
         on_delete=models.DO_NOTHING,
@@ -542,6 +741,15 @@ class AnnouncementCarEquipment(models.Model):
         blank=True,
         related_name="roof_car_name_announcement",
         verbose_name="тип крыши"
+    )
+    seat_name = models.ForeignKey(
+        to="EquipmentCar",
+        on_delete=models.DO_NOTHING,
+        db_index=True,
+        null=True,
+        blank=True,
+        related_name="seat_name_announcement",
+        verbose_name="тип сидений"
     )
     salon_car_name = models.ForeignKey(
         to="EquipmentCar",
@@ -597,376 +805,3 @@ class EquipmentCar(models.Model):
             models.CheckConstraint(check=Q(characteristic__length__gte=0),
                                    name="characteristic__length__gte")
         )
-
-
-# class ClimateControlType(models.Model):
-#     climate_control_name = models.CharField(
-#         max_length=64,
-#         blank=False,
-#         null=False,
-#         unique=True,
-#         verbose_name="климат-контроль"
-#     )
-#
-#     def __str__(self):
-#         return self.climate_control_name
-#
-#     class Meta:
-#         verbose_name = 'климат-контроль'
-#         verbose_name_plural = 'климат-контроли'
-#         constraints = (
-#             models.CheckConstraint(check=Q(climate_control_name__length__lte=64),
-#                                    name="climate_control_name__length__lte"),
-#             models.CheckConstraint(check=Q(climate_control_name__length__gte=0),
-#                                    name="climate_control_name__length__gte")
-#         )
-#
-#
-# class BluetoothType(models.Model):
-#     bluetooth_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="bluetooth-система"
-#     )
-#
-#     def __str__(self):
-#         return self.bluetooth_name
-#
-#     class Meta:
-#         verbose_name = 'bluetooth-система'
-#         verbose_name_plural = 'bluetooth-системы'
-#         constraints = (
-#             models.CheckConstraint(check=Q(bluetooth_name__length__lte=50), name="bluetooth_name__length__lte"),
-#             models.CheckConstraint(check=Q(bluetooth_name__length__gte=0), name="bluetooth_name__length__gte")
-#         )
-#
-#
-# class RaisSensorType(models.Model):
-#     rain_sensor_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="датчик дождя"
-#     )
-#
-#     def __str__(self):
-#         return self.rain_sensor_name
-#
-#     class Meta:
-#         verbose_name = 'датчик дождя'
-#         verbose_name_plural = 'датчики дождя'
-#         constraints = (
-#             models.CheckConstraint(check=Q(rain_sensor_name__length__lte=50), name="rain_sensor_name__length__lte"),
-#             models.CheckConstraint(check=Q(rain_sensor_name__length__gte=0), name="rain_sensor_name__length__gte")
-#         )
-#
-#
-# class LightSensorType(models.Model):
-#     light_sensor_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="датчик света"
-#     )
-#
-#     def __str__(self):
-#         return self.light_sensor_name
-#
-#     class Meta:
-#         verbose_name = 'датчик света'
-#         verbose_name_plural = 'датчики света'
-#         constraints = (
-#             models.CheckConstraint(check=Q(light_sensor_name__length__lte=50), name="light_sensor_name__length__lte"),
-#             models.CheckConstraint(check=Q(light_sensor_name__length__gte=0), name="light_sensor_name__length__gte")
-#         )
-#
-#
-# class StartStopType(models.Model):
-#     start_stop_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="система start-stop"
-#     )
-#
-#     def __str__(self):
-#         return self.start_stop_name
-#
-#     class Meta:
-#         verbose_name = 'система start-stop'
-#         verbose_name_plural = 'системы start-stop'
-#         constraints = (
-#             models.CheckConstraint(check=Q(start_stop_name__length__lte=50), name="start_stop_name__length__lte"),
-#             models.CheckConstraint(check=Q(start_stop_name__length__gte=0), name="start_stop_name__length__gte")
-#         )
-#
-#
-# class HeatedSeatsType(models.Model):
-#     heated_seats_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="подогрев сидений"
-#     )
-#
-#     def __str__(self):
-#         return self.heated_seats_name
-#
-#     class Meta:
-#         verbose_name = 'подогрев сидения'
-#         verbose_name_plural = 'подогрев сидений'
-#         constraints = (
-#             models.CheckConstraint(check=Q(heated_seats_name__length__lte=50), name="heated_seats_name__length__lte"),
-#             models.CheckConstraint(check=Q(heated_seats_name__length__gte=0), name="heated_seats_name__length__gte")
-#         )
-#
-#
-# class VentilationSeatsType(models.Model):
-#     ventilation_seats_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="вентиляция сидений"
-#     )
-#
-#     def __str__(self):
-#         return self.ventilation_seats_name
-#
-#     class Meta:
-#         verbose_name = 'вентиляция сидения'
-#         verbose_name_plural = 'вентиляция сидений'
-#         constraints = (
-#             models.CheckConstraint(check=Q(ventilation_seats_name__length__lte=50),
-#                                    name="ventilation_seats_name__length__lte"),
-#             models.CheckConstraint(check=Q(ventilation_seats_name__length__gte=0),
-#                                    name="ventilation_seats_name__length__gte")
-#         )
-#
-#
-# class AdjustmentsSeatsType(models.Model):
-#     adjustments_seats_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="регулировка сидений"
-#     )
-#
-#     def __str__(self):
-#         return self.adjustments_seats_name
-#
-#     class Meta:
-#         verbose_name = 'регулировка сидения'
-#         verbose_name_plural = 'регулировка сидений'
-#         constraints = (
-#             models.CheckConstraint(check=Q(adjustments_seats_name__length__lte=50),
-#                                    name="adjustments_seats_name__length__lte"),
-#             models.CheckConstraint(check=Q(adjustments_seats_name__length__gte=0),
-#                                    name="adjustments_seats_name__length__gte")
-#         )
-#
-#
-# class BlindSpotMonitoringSystemType(models.Model):
-#     blind_spot_monitoring_system_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="система контроля слепых зон"
-#     )
-#
-#     def __str__(self):
-#         return self.blind_spot_monitoring_system_name
-#
-#     class Meta:
-#         verbose_name = 'система контроля слепых зон'
-#         verbose_name_plural = 'системы контроля слепых зон'
-#         constraints = (
-#             models.CheckConstraint(check=Q(blind_spot_monitoring_system_name__length__lte=50),
-#                                    name="blind_spot_monitoring_system_name__length__lte"),
-#             models.CheckConstraint(check=Q(blind_spot_monitoring_system_name__length__gte=0),
-#                                    name="blind_spot_monitoring_system_name__length__gte")
-#         )
-#
-#
-# class CollisionAvoidanceSystemType(models.Model):
-#     collision_avoidance_system_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="система избежания столкновений"
-#     )
-#
-#     def __str__(self):
-#         return self.collision_avoidance_system_name
-#
-#     class Meta:
-#         verbose_name = 'система избежания столкновений'
-#         verbose_name_plural = 'системы избежания столкновений'
-#         constraints = (
-#             models.CheckConstraint(check=Q(collision_avoidance_system_name__length__lte=50),
-#                                    name="collision_avoidance_system_name__length__lte"),
-#             models.CheckConstraint(check=Q(collision_avoidance_system_name__length__gte=0),
-#                                    name="collision_avoidance_system_name__length__gte")
-#         )
-#
-#
-# class LaneDepartureWarningSystemType(models.Model):
-#     lane_departure_warning_system_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="система предупреждения о сходе с полосы"
-#     )
-#
-#     def __str__(self):
-#         return self.lane_departure_warning_system_name
-#
-#     class Meta:
-#         verbose_name = 'система предупреждения о сходе с полосы'
-#         verbose_name_plural = 'системы предупреждения о сходе с полосы'
-#         constraints = (
-#             models.CheckConstraint(check=Q(lane_departure_warning_system_name__length__lte=50),
-#                                    name="lane_departure_warning_system_name__length__lte"),
-#             models.CheckConstraint(check=Q(lane_departure_warning_system_name__length__gte=0),
-#                                    name="lane_departure_warning_system_name__length__gte")
-#         )
-#
-#
-# class HeadlightsType(models.Model):
-#     headlights_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="тип фар"
-#     )
-#
-#     def __str__(self):
-#         return self.headlights_name
-#
-#     class Meta:
-#         verbose_name = 'тип фар'
-#         verbose_name_plural = 'типы фар'
-#         constraints = (
-#             models.CheckConstraint(check=Q(headlights_name__length__lte=50), name="headlights_name__length__lte"),
-#             models.CheckConstraint(check=Q(headlights_name__length__gte=0), name="headlights_name__length__gte")
-#         )
-#
-#
-# class ParkingSensorsType(models.Model):
-#     parking_sensors_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="датчик парковки"
-#     )
-#
-#     def __str__(self):
-#         return self.parking_sensors_name
-#
-#     class Meta:
-#         verbose_name = 'датчик парковки'
-#         verbose_name_plural = 'датчики парковки'
-#         constraints = (
-#             models.CheckConstraint(check=Q(parking_sensors_name__length__lte=50),
-#                                    name="parking_sensors_name__length__lte"),
-#             models.CheckConstraint(check=Q(parking_sensors_name__length__gte=0),
-#                                    name="parking_sensors_name__length__gte")
-#         )
-#
-#
-# class RoofCarType(models.Model):
-#     roof_car_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="тип крышы"
-#     )
-#
-#     def __str__(self):
-#         return self.roof_car_name
-#
-#     class Meta:
-#         verbose_name = 'тип крышы'
-#         verbose_name_plural = 'типы крыш'
-#         constraints = (
-#             models.CheckConstraint(check=Q(roof_car_name__length__lte=50), name="roof_car_name__length__lte"),
-#             models.CheckConstraint(check=Q(roof_car_name__length__gte=0), name="roof_car_name__gte")
-#         )
-#
-#
-# class SalonCarType(models.Model):
-#     salon_car_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="тип салона"
-#     )
-#
-#     def __str__(self):
-#         return self.salon_car_name
-#
-#     class Meta:
-#         verbose_name = 'тип салона'
-#         verbose_name_plural = 'типы салона'
-#         constraints = (
-#             models.CheckConstraint(check=Q(salon_car_name__length__lte=50), name="salon_car_name__length__lte"),
-#             models.CheckConstraint(check=Q(salon_car_name__length__gte=0), name="salon_car_name__length__gte")
-#         )
-#
-#
-# class ColorSalonCarType(models.Model):
-#     color_salon_car_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="цвет салона"
-#     )
-#
-#     def __str__(self):
-#         return self.color_salon_car_name
-#
-#     class Meta:
-#         verbose_name = 'цвет салона'
-#         verbose_name_plural = 'цвета салона'
-#         constraints = (
-#             models.CheckConstraint(check=Q(color_salon_car_name__length__lte=50),
-#                                    name="color_salon_car_name__length__lte"),
-#             models.CheckConstraint(check=Q(color_salon_car_name__length__gte=0),
-#                                    name="color_salon_car_name__length__gte")
-#         )
-#
-#
-# class BodyKitType(models.Model):
-#     body_kit_name = models.CharField(
-#         max_length=50,
-#         null=False,
-#         blank=False,
-#         unique=True,
-#         verbose_name="обвес"
-#     )
-#
-#     def __str__(self):
-#         return self.body_kit_name
-#
-#     class Meta:
-#         verbose_name = 'обвес'
-#         verbose_name_plural = 'обвесы'
-#         constraints = (
-#             models.CheckConstraint(check=Q(body_kit_name__length__lte=50), name="body_kit_name__length__lte"),
-#             models.CheckConstraint(check=Q(body_kit_name__length__gte=0), name="body_kit_name__length__gte")
-#         )

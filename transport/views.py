@@ -5,7 +5,7 @@ from .forms import SelectCarsForm, SearchCarForm
 
 class CarSearchListView(ListView):
     model = AnnouncementCar
-    paginate_by = 10
+    paginate_by = 9
     template_name = 'transport/search.html'
     context_object_name = 'search_car'
     queryset = AnnouncementCar.objects.all()
