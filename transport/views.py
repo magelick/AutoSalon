@@ -8,7 +8,7 @@ class CarSearchListView(ListView):
     paginate_by = 9
     template_name = 'transport/search.html'
     context_object_name = 'search_car'
-    queryset = AnnouncementCar.objects.all()
+    queryset = AnnouncementCar.objects.all().order_by('car_brand')
 
     def get_queryset(self):
         queryset = self.queryset

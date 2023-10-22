@@ -479,7 +479,7 @@ class AnnouncementCarEquipment(models.Model):
         null=True,
         blank=True,
         related_name="door_closer_name_announcement",
-        verbose_name="тип ключа"
+        verbose_name="доводчики дверей"
     )
     heated_seats_name = models.ForeignKey(
         to="EquipmentCar",
@@ -695,7 +695,7 @@ class AnnouncementCarEquipment(models.Model):
         null=True,
         blank=True,
         related_name="navigation_name_announcement",
-        verbose_name="дистанционное управление автомобилем"
+        verbose_name="навигацонная система"
     )
     headlights_name = models.ForeignKey(
         to="EquipmentCar",
