@@ -44,6 +44,7 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 # Application definition
 
+# Подключаем все необходимые приложения
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,7 +92,7 @@ WSGI_APPLICATION = 'autosalon.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+# Подключаем Postgresql к проекту
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -123,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
-
+# Язык приложения выбираем русский
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
@@ -134,12 +135,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+# Подключаем папку static
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-
+# Подключаем папку media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

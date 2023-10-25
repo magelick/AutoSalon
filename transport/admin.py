@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.text import slugify
 
 from .models import (
     BrandCar,
@@ -19,6 +18,7 @@ from .models import (
 )
 
 
+# Регистрация модели Бренда
 @admin.register(BrandCar)
 class BrandAdmin(admin.ModelAdmin):
     search_fields = ('brand_name',)
@@ -28,6 +28,7 @@ class BrandAdmin(admin.ModelAdmin):
     ordering = ('brand_name',)
 
 
+# Регистрация модели Модели Бренда
 @admin.register(ModelCar)
 class ModelAdmin(admin.ModelAdmin):
     search_fields = ('model_name',)
@@ -38,6 +39,7 @@ class ModelAdmin(admin.ModelAdmin):
     ordering = ('brand',)
 
 
+# Регистрация модели Кузова Модели
 @admin.register(BodyCar)
 class BodyAdmin(admin.ModelAdmin):
     search_fields = ('body_name',)
@@ -48,6 +50,7 @@ class BodyAdmin(admin.ModelAdmin):
     ordering = ('model',)
 
 
+# Регистрация модели Года выпуска
 @admin.register(YearOfIssueType)
 class YYearOfIssueTypeAdmin(admin.ModelAdmin):
     list_display = ('year_of_issue',)
@@ -57,6 +60,7 @@ class YYearOfIssueTypeAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Пробега
 @admin.register(MileageType)
 class MileageTypeAdmin(admin.ModelAdmin):
     list_display = ('mileage',)
@@ -66,6 +70,7 @@ class MileageTypeAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Типа двигателя
 @admin.register(EngineTypeCar)
 class EngineTypeAdmin(admin.ModelAdmin):
     list_display = ('engine',)
@@ -75,6 +80,7 @@ class EngineTypeAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Типа коробки передач
 @admin.register(TransmissionType)
 class TransmissionTypeAdmin(admin.ModelAdmin):
     list_display = ('transmission',)
@@ -84,6 +90,7 @@ class TransmissionTypeAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Типа привода
 @admin.register(DriveUnitType)
 class DriveUnitTypeAdmin(admin.ModelAdmin):
     list_display = ('drive_unit',)
@@ -93,6 +100,7 @@ class DriveUnitTypeAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Типа кузова
 @admin.register(BodyTypeCar)
 class BodyTypeCarAdmin(admin.ModelAdmin):
     list_display = ('body_type',)
@@ -102,6 +110,7 @@ class BodyTypeCarAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Цвета кузова
 @admin.register(ColorType)
 class ColorTypeAdmin(admin.ModelAdmin):
     list_display = ('color',)
@@ -111,6 +120,7 @@ class ColorTypeAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Объявления
 @admin.register(AnnouncementCar)
 class AnnouncementCarAdmin(admin.ModelAdmin):
     search_fields = ('car_brand', 'car_model', 'car_body')
@@ -137,12 +147,14 @@ class AnnouncementCarAdmin(admin.ModelAdmin):
     }
 
 
+# Регистрация модели Фотографий объявления
 @admin.register(AnnouncementCarImage)
 class AnnouncementCarImageAdmin(admin.ModelAdmin):
     list_display = ('image',)
     ordering = ('announcement_car',)
 
 
+# Регистрация модели Комплектации объявления
 @admin.register(AnnouncementCarEquipment)
 class AnnouncementCarEquipmentAdmin(admin.ModelAdmin):
     list_display = (
@@ -169,6 +181,7 @@ class AnnouncementCarEquipmentAdmin(admin.ModelAdmin):
     ordering = ('equipment_car',)
 
 
+# Регистрация модели Характеристик комплектации
 @admin.register(EquipmentCar)
 class EquipmentCarAdmin(admin.ModelAdmin):
     list_display = ('characteristic',)
