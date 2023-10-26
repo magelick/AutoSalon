@@ -27,14 +27,18 @@ class ContactTemplateView(TemplateView):
     template_name = 'shop/contact.html'  # Шаблон
     context_object_name = 'contact'  # Данные на шаблоне
 
-    # Метод, отбражающая форму на шаблоне
     def get_context_data(self, **kwargs):
+        """
+        Метод, отбражающая форму на шаблоне
+        """
         context = super().get_context_data(**kwargs)
         context['form'] = ContactForm()  # Расширяем словарь данных на шаблоне формой ContactForm
         return context
 
-    # Метод, обрабатывающая данные из формы
     def post(self, request):
+        """
+        Метод, обрабатывающая данные из формы
+        """
         form = ContactForm(request.POST)  # Берём заполненую форму
 
         if form.is_valid():  # Если данные валидны

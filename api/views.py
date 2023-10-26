@@ -9,28 +9,3 @@ class AnnouncementCarCreateViewSet(ModelViewSet):
     serializer_class = serializers.AnnouncementCarSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
-# class AnnouncementCarReadViewSet(ModelViewSet):
-#     def get(self, request):
-#         return self.list(
-#             request,
-#             queryset=AnnouncementCar.objects.all(),
-#             serializers=serializers.AnnouncementCarSerializer
-#         )
-#
-#
-# class AnnouncementCarUpdateViewSet(ModelViewSet):
-#     def put(self, request):
-#         return self.update(
-#             request,
-#             queryset=AnnouncementCar.objects.all(),
-#             serializers=serializers.AnnouncementCarSerializer
-#         )
-#
-#
-# class AnnouncementCarDeleteViewSet(ModelViewSet):
-#     def delete(self, request):
-#         return self.destroy(
-#             request,
-#             queryset=AnnouncementCar.objects.all(),
-#             serializers=serializers.AnnouncementCarSerializer
-#         )

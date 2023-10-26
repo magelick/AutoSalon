@@ -8,11 +8,13 @@ from .tasks import send_registration_message_for_email
 
 class RegisterUsersView(CreateView):
     """ Представление для регистрации новых пользователей"""
-    form_class = RegisterUsersForm   # Форма для класса
+    form_class = RegisterUsersForm  # Форма для класса
     template_name = 'users/register.html'  # Шаблон
 
-    # Метод для обработки данных из формы
     def post(self, request, *args, **kwargs):
+        """
+        Метод для обработки данных из формы
+        """
         form = RegisterUsersForm(request.POST)  # Берём заполненую форму
 
         if form.is_valid():  # Песли данные валидины
@@ -33,8 +35,10 @@ class LoginUsersView(LoginView):
     form_class = AuthenticationUsersForm  #
     template_name = 'users/login.html'  #
 
-    # Метод для обработки данных из формы
     def post(self, request, *args, **kwargs):
+        """
+        Метод для обработки данных из формы
+        """
         form = AuthenticationUsersForm(request.GET)  # Берём заполеную форму
 
         username = self.request.POST.get('username')  # Достаём имя пользователя

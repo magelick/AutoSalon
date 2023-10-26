@@ -90,13 +90,17 @@ class CarDetailView(ListView):
     context_object_name = 'car_details'  # Данные на шаблоне
     queryset = AnnouncementCar.objects.all()  # Query-set параметры
 
-    # Метод, фильтрующий данные конкретного объявления по слагу
     def get_queryset(self):
+        """
+        Метод, фильтрующий данные конкретного объявления по слагу
+        """
         # Возвращаем данные, отфильтрованные по слагу
         return self.queryset.filter(slug=self.kwargs.get("slug"))
 
-    # Метод, отображающий данные конкретного объвления
     def get_context_data(self, *, object_list=None, **kwargs):
+        """
+        Метод, отображающий данные конкретного объвления
+        """
         context = super().get_context_data(**kwargs)
         car_object = self.get_queryset().first()  # Выводим на шаблон первое совпадающие объявление
         context['equipment_data'] = car_object.equipment.all()  # Вывожим отдельно комплектацию конкретного объявления
