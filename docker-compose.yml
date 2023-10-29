@@ -1,67 +1,71 @@
-version: "3.8"
+version: "3.8"  # Версия
 
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: "autosalon"
-    ports:
+services:  # Все контейнеры в рамках одного большого контейнера
+  app:  # Основной контейнер приложения
+    build:  # Dockerfile:
+      context: .  # Где лежит
+      dockerfile: Dockerfile  # Как называется
+    container_name: "autosalon"  # Имя сервиса (контейнера)
+    ports:  # Порты
       - "8001:8000"
-    environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/1
-      - SECRET_KEY=django-insecure-urv_$^55e2j!hm#=b+9zkddjrzgbklnk3gj-1jdrm)znnr_(do
-      - DEBUG=1
-      - ALLOWED_HOSTS=0.0.0.0|127.0.0.1
-      - POSTGRES_DB=autosalon
-      - POSTGRES_USER=admin1
-      - POSTGRES_PASSWORD=1234567890
-      - POSTGRES_PORT=5432
-      - POSTGRES_HOST=db
-
-    command: python manage.py runserver 0.0.0.0:8000
-    restart: always
-    volumes:
-      - .:/app
-    depends_on:
-      - db
-      - redis
-      - celery-worker
-
-  db:
-    image: postgres:15.3-alpine
-    container_name: "autosalon-postgres"
-    hostname: db
-    restart: always
-    volumes:
-      - .:/data/db/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=autosalon
-      - POSTGRES_PASSWORD=1234567890
-      - POSTGRES_USER=admin1
-      - POSTGRES_HOST_AUTH_METHOD=trust
-
-  redis:
-    image: redis:7.0.4-alpine
-    container_name: autosalon-redis
-    hostname: redis
-    restart: always
-
-  celery-worker:
-    image: "autosalon"
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: "autosalon-celery-worker"
-    environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/1
-    command: celery -A autosalon worker -l INFO
-    logging:
+    logging: # Настройка логирования
       options:
-        max-size: '500M'
-        max-file: '5'
-    restart: always
-    volumes:
+        max-size: '500M'  # Максимум по 500 Мб логи
+        max-file: '5'  # Максимальное число лог-файлов
+    environment:  # Переменные окружения
+      - CELERY_BROKER_URL=redis://redis:6379/0  # Брокер Celery
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1  # Результаты выполнения Celery
+      - SECRET_KEY=django-insecure-urv_$^55e2j!hm#=b+9zkddjrzgbklnk3gj-1jdrm)znnr_(do  # Секретный ключ
+      - DEBUG=1  # Флаг DEBUG
+      - ALLOWED_HOSTS=0.0.0.0|127.0.0.1  # Хосты приложения
+      - POSTGRES_DB=autosalon  # БД
+      - POSTGRES_USER=admin1  # Пользователь БД
+      - POSTGRES_PASSWORD=1234567890  # Пароль от БД
+      - POSTGRES_PORT=5432  # Порт БД
+      - POSTGRES_HOST=db  # Хост БД
+
+    command: python manage.py runserver 0.0.0.0:8000  # Команда для запуска контейнера
+    restart: always  # Флаг всегда переподнимать контейнер
+    volumes:  # Все изменения в данном контейнере будут сохранятся в рабочую директорию контейнера
+      - .:/app
+    depends_on:  # Зависимости контейнера - контейнер app будет подниаться после контейнеров:
+      - db  # Контейнер БД
+      - redis  # Контейнер Redis
+      - celery-worker  # Контейнер Celery
+
+  db:  # Контейнер БД
+    image: postgres:15.3-alpine  # Образ, на основе которого будет создан контейнер
+    container_name: "autosalon-postgres"  # Имя контейнера
+    hostname: db  # Имя хоста
+    restart: always  # Флаг всегда переподнимать контейнер
+    volumes:  # ВСе изменнеия в этом контейнере буду тсохранятся в рабочей директории контейнера
+      - .:/data/db/var/lib/postgresql/data
+    environment:  # Переменные окружения
+      - POSTGRES_DB=autosalon  # БД
+      - POSTGRES_PASSWORD=1234567890  # Пароль от БД
+      - POSTGRES_USER=admin1  # Пользователь БД
+      - POSTGRES_HOST_AUTH_METHOD=trust  # Флаг, говорящий не запрашивать пароль у пользователя при авторизации
+
+  redis:  # Контейнер Redis
+    image: redis:7.0.4-alpine  # Образ, на основе которого будет создан контейнер
+    container_name: autosalon-redis  # Имя контейнера
+    hostname: redis  # Имя хоста
+    restart: always  # Флаг всегда переподнимать контейнер
+
+  celery-worker:  # Контейнер Celery
+    image: "autosalon"  # Образ, на основе которого будет создан контейнер
+    build:  #  Dockerfile:
+      context: .  # Где лежит
+      dockerfile: Dockerfile  # Как называется
+    container_name: "autosalon-celery-worker"  #  Имя контейнера
+    environment:  # Перменные окружения
+      - CELERY_BROKER_URL=redis://redis:6379/0  # Брокер Celery
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1  # Результаты выполнения Celery
+    command: celery -A autosalon worker -l INFO  # Команда для запуска контейнера
+    logging:  # Настройка логирования
+      options:
+        max-size: '500M'  # Максимум по 500 Мб логи
+        max-file: '5'  # Максимальное число лог-файлов
+    restart: always  # Флаг всегда перезапускать контейнер
+    volumes:  #
       - .:/app
