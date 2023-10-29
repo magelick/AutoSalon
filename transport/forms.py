@@ -45,14 +45,6 @@ class SelectCarsForm(forms.Form):
     body_type = forms.ChoiceField(
         required=False
     )
-    # Минимальная цена
-    min_price = forms.IntegerField(
-        required=False
-    )
-    # Максимальная цена
-    max_price = forms.IntegerField(
-        required=False
-    )
 
 
 class SearchCarForm(forms.Form):

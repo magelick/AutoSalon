@@ -24,8 +24,8 @@ from .views import NotFoundTemplateView
 handler = NotFoundTemplateView.as_view()
 # Найстраиваем пути к остальным приложениям
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Путь к админ-панели
     path('api/', include('api.urls')),  # Путь к API
+    path('admin/', admin.site.urls),  # Путь к админ-панели
     path('', include('shop.urls')),  # Путь к основным страницам сайта
     path('search/', include('transport.urls')),  # Путь к данным о транспорте
     path('users/', include('users.urls')),  # Путь к даным о пользователях
